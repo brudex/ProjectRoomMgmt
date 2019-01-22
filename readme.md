@@ -4,6 +4,7 @@
  3 Room allocation : For admitted students who come on training we should be able to assign rooms to them while they are on training
 
  The menu for the above features will therefore be
-   Capture Admissions
-   Search Admissions (the form will have by date , name and status i.e rejected or accepted)
-   Room Booking
+  1. Capture Admissions
+  2. Search Admissions (the form will search by date , name and status i.e rejected or accepted)
+  3. Admitted Students (this are students who have been admitted only. The page should have a search form at the top   to search by date admitted, name and student no.). Beside each row there should be actions to allocate room, deactivate student, assign transportation
+  4. Room Booking. Students will be allocated rooms on this page
