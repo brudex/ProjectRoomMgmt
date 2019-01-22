@@ -10,7 +10,21 @@ namespace ProjectRoomMgmt.Controllers
     public class RoomController : Controller
     {
         // GET: Room
-        public ActionResult Booking()
+        public ActionResult RoomAllocation()
+        {
+            var vm = new RoomViewModel();
+            return View();
+        }
+
+        // GET: Room
+        public ActionResult ManageBookings()
+        {
+            var vm = new RoomViewModel();
+            return View();
+        }
+
+        // GET: Room
+        public ActionResult ManageRooms()
         {
             var vm = new RoomViewModel();
             return View();

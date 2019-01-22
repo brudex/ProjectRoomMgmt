@@ -226,9 +226,11 @@
     <Compile Include="Controllers\Api\AdmissionApiController.cs" />
     <Compile Include="Controllers\Api\DefaultController.cs" />
     <Compile Include="Controllers\Api\RoomApiController.cs" />
+    <Compile Include="Controllers\Api\StudentApiController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1327,6 +1329,16 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-messages.js" />
+    <Content Include="Scripts\angular-ui-router.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\app.module.js" />
+    <Content Include="Scripts\app\btc.controller.js" />
+    <Content Include="Scripts\app\services.factory.js" />
+    <Content Include="Scripts\app\utilities.factory.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -1528,9 +1540,15 @@
     <Content Include="Content\pages\scss\_responsive.scss" />
     <Content Include="Content\pages\scss\_var.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\flipclock.css" />
+    <Content Include="Scripts\flipclock.js" />
+    <Content Include="Scripts\flipclock.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.countdown.min.js" />
+    <Content Include="Scripts\jquery.qrcode.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1538,6 +1556,11 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\site.js" />
+    <Content Include="Scripts\site.min.js" />
+    <Content Include="Scripts\social-widgets-config.js" />
+    <Content Include="Scripts\theme.functions.js" />
+    <Content Include="Scripts\TimeCircles.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1578,6 +1601,10 @@
     <Content Include="Views\Admission\AdmissionStatus.cshtml" />
     <Content Include="Views\Admission\Search.cshtml" />
     <Content Include="Views\Room\Booking.cshtml" />
+    <Content Include="Views\Student\Manage.cshtml" />
+    <Content Include="Views\Room\RoomAllocation.cshtml" />
+    <Content Include="Views\Room\ManageBookings.cshtml" />
+    <Content Include="Views\Room\ManageRooms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1597,6 +1624,7 @@
     <Folder Include="Content\assets\plugins\angular-wizard\" />
     <Folder Include="Content\assets\plugins\angular\" />
     <Folder Include="Content\assets\plugins\ng-switchery\" />
+    <Folder Include="Scripts\vendor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

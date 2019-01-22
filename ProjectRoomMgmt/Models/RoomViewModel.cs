@@ -9,6 +9,7 @@ namespace ProjectRoomMgmt.Models
 {
     public class RoomViewModel
     {
+        public RoomViewModel() { }
         public RoomViewModel(JObject data)
         {
             throw new NotImplementedException();
