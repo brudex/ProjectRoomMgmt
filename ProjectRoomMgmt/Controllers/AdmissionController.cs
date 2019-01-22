@@ -11,7 +11,7 @@ namespace ProjectRoomMgmt.Controllers
     public class AdmissionController : Controller
     {
         // GET: Admission
-        public ActionResult Create()
+        public ActionResult Create() 
         {
             //Todo Create a form to create and addmission using the model below
             var vm = new AdmissionViewModel();
@@ -22,12 +22,12 @@ namespace ProjectRoomMgmt.Controllers
         public ActionResult Create(AdmissionViewModel model)
         {
 
-            if (!ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Invalid data.");
                 return View(model);
             }
-             model.SaveAdmission();
+            model.SaveAdmission();
             return View(model);
             
         }

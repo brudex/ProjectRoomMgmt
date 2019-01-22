@@ -19,6 +19,7 @@ namespace ProjectRoomMgmt.Models
         public string OriginatingInstitute { get; set; } //e.g., Police, Immigration etc.
         public string CourseName { get; set; } //Name of course being applied for
         public string AdmissionStatus { get; set; } //Pending, Rejected, Accepted
+        public DateTime CreatedAt { get; set; }  //Pending, Rejected, Accepted
 
 
         public void SaveAdmission()
