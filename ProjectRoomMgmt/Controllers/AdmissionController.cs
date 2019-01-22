@@ -20,16 +20,14 @@ namespace ProjectRoomMgmt.Controllers
  
         [HttpPost]
         public ActionResult Create(AdmissionViewModel model)
-        {
-
+        { 
             if(!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Invalid data.");
                 return View(model);
             }
             model.SaveAdmission();
-            return View(model);
-            
+            return View(model); 
         }
 
         public ActionResult AdmissionStatus()
