@@ -1562,6 +1562,8 @@
     <Content Include="Scripts\theme.functions.js" />
     <Content Include="Scripts\TimeCircles.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Admission\AdmissionStatus.cshtml" />
+    <Content Include="Views\Admission\Search.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1597,14 +1599,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout_Main.cshtml" />
-    <Content Include="Views\Admission\Create.cshtml" />
-    <Content Include="Views\Admission\AdmissionStatus.cshtml" />
-    <Content Include="Views\Admission\Search.cshtml" />
     <Content Include="Views\Room\Booking.cshtml" />
     <Content Include="Views\Student\Manage.cshtml" />
     <Content Include="Views\Room\RoomAllocation.cshtml" />
     <Content Include="Views\Room\ManageBookings.cshtml" />
     <Content Include="Views\Room\ManageRooms.cshtml" />
+    <Content Include="Views\Admission\Capture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
