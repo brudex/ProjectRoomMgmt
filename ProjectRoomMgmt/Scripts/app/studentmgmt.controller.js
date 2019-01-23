@@ -8,12 +8,23 @@
         var vm = this;
         vm.errorMsg = [];
         vm.successMsg = [];
-        
+        vm.searchResult = [];
         vm.model = { searchFormValid:false };
 
         vm.init = function ( ) {
             
         };
+
+        vm.findStudent = function() {
+            var payload = vm.model;
+            services.findStudent(payload, function (response) {
+                if (response.status === "00") {
+                    vm.searchResult = response.data;
+                }
+
+            });
+
+        }
 
         
     }

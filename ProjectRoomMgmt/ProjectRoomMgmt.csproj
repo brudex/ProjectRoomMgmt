@@ -1336,7 +1336,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.module.js" />
-    <Content Include="Scripts\app\btc.controller.js" />
+    <Content Include="Scripts\app\studentmgmt.controller.js" />
     <Content Include="Scripts\app\services.factory.js" />
     <Content Include="Scripts\app\utilities.factory.js" />
     <Content Include="Scripts\bootstrap.js" />
