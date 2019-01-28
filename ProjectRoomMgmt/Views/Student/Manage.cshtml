@@ -26,11 +26,11 @@
         <div class="row" data-ng-show="vm.model.searchMode == 'bydate'">
             <label class="col-md-3">Search Date</label>
             <div class="col-md-4">
-                <input type="text" placeholder="From Date" data-ng-model="vm.model.fromDate"/>  
+                <input type="text" placeholder="From Date" data-ng-model="vm.model.fromDate"/>
             </div>
             <div class="col-md-4">
-                <input type="text"  placeholder="To Date" data-ng-model="vm.model.fromDate"/>  
-            </div> 
+                <input type="text" placeholder="To Date" data-ng-model="vm.model.fromDate"/>
+            </div>
         </div>
         <div class="row" data-ng-show="vm.model.searchMode == 'byword'">
             <label class="col-md-3">Search by name or student no.</label>
@@ -39,5 +39,21 @@
             </div>
         </div>
         <button class="btn btn-success">Find Student</button>
+    </div>
+
+    <div class="col-md-12">
+        <table>
+            <thead>
+            <tr>
+                <td>Full Name</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+        </table>
     </div>
 </div>

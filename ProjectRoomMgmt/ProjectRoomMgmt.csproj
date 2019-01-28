@@ -1597,7 +1597,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout_Main.cshtml" />
-    <Content Include="Views\Admission\Create.cshtml" />
+    <Content Include="Views\Admission\Capture.cshtml" />
     <Content Include="Views\Admission\AdmissionStatus.cshtml" />
     <Content Include="Views\Admission\Search.cshtml" />
     <Content Include="Views\Room\Booking.cshtml" />
