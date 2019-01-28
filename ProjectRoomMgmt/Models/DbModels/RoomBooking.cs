@@ -14,7 +14,7 @@ namespace ProjectRoomMgmt.Models.DbModels
         public DateTime BookingDate { get; set; }
         public DateTime ExpectedVacationDate { get; set; }
         public DateTime VacatedAt { get; set; }
-        public  int BookingStatusId { get; set; }
+        public  string  BookingStatus{ get; set; }
         public  bool Active { get; set; }
     }
 }

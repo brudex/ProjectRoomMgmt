@@ -9,32 +9,30 @@
         vm.errorMsg = [];
         vm.successMsg = [];
         vm.searchResult = [];
-        vm.model = { searchFormValid:false };
+        vm.model = { searchFormValid: false };
 
-        vm.init = function ( ) {
+        vm.init = function () {
             initApplicationsTable();
         };
 
-        vm.findStudent = function() {
+        vm.findStudent = function () {
             var payload = vm.model;
             services.findStudent(payload, function (response) {
                 if (response.status === "00") {
                     vm.searchResult = response.data;
                 }
-
             });
-
         }
 
-        vm.newAdmission=function() {
+        vm.newAdmission = function () {
             $("#newAdmissionModal").modal("show");
         }
 
-        vm.advancedSearch=function() {
+        vm.advancedSearch = function () {
             $("#AdvancedSearchModal").modal("show");
         }
 
-        var initApplicationsTable = function() {
+        var initApplicationsTable = function () {
 
             var table = $('#applicationsTable');
 

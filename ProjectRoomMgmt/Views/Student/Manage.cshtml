@@ -11,9 +11,9 @@
 <div class="row" data-ng-controller="StudentMgmtController as vm">
     <div class="col-md-12">
         <div class="form-group">
-            <label class="col-md-3">Search Mode</label>
+            <label class="col-md-3">Manage Mode</label>
             <div class="col-md-3">
-                <input type="radio" value="bydate" data-ng-model="vm.model.searchMode"/> Search by Date
+                <input type="radio" value="bydate" data-ng-model="vm.model.searchMode"/> Manage by Date
             </div>
             <div class="col-md-3">
                 <label><input type="radio" value="byword" data-ng-model="vm.model.searchMode"/> By Name or Student No.</label>
@@ -24,7 +24,7 @@
     <div class="col-md-12">
 
         <div class="row" data-ng-show="vm.model.searchMode == 'bydate'">
-            <label class="col-md-3">Search Date</label>
+            <label class="col-md-3">Manage Date</label>
             <div class="col-md-4">
                 <input type="text" placeholder="From Date" data-ng-model="vm.model.fromDate"/>
             </div>
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="row" data-ng-show="vm.model.searchMode == 'byword'">
-            <label class="col-md-3">Search by name or student no.</label>
+            <label class="col-md-3">Manage by name or student no.</label>
             <div class="col-md-4">
                 <input type="text" placeholder="Enter name or student no." data-ng-model="vm.model.searchText"/>
             </div>

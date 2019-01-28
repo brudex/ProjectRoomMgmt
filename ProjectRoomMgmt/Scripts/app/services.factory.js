@@ -6,31 +6,8 @@
     function DataService($http, $location,$window) {
         var baseUrl = "";      
         return {          
-            btcBuyersPageCount: getData('/Btc/BuyersPageCount'),
-            btcSellersPageCount: getData('/Btc/SellersPageCount'),
-            getBtcBuyersByPage: getData('/Btc/BuyersPage'),
-            getBtcSellersByPage: getData('/Btc/SellersPage'),
-            searchBtcSellers: postData('/Btc/SearchSellers'),
-            searchBtcBuyers: postData('/Btc/SearchBuyers'),
-            getLocalCoinPrice: getData('/CoinData/LocalPrice'),
-            getPaymentMethods: getData('/CoinData/PaymentMethods'),
-            getRefExchanges: getData('/CoinData/RefExchanges'),
-            getPaymentMethodFields: getData('/CoinData/PaymentMethodFields'),
-            defaultExchangeRate: postData('/CoinData/DefaultExchangeRate'),
-            refExchangePrice: postData('/CoinData/RefExchangePrice'),
-            createOfferAdvert: postData('/CoinAction/CreateOfferAdvert'),
-            submitFormWithdrawal: postData('/Wallet/Withdraw'),
-            makeDepositRequest: postData('/Wallet/DepositRequest'),
-            getPendindDeposit: postData('/Wallet/PendingDeposits') ,
-            paymentRececiveConfirmation: postData('/Trade/ConfirmPaymentReceived'),
-            disputePayment: postData('/Trade/DisputeTrade'),
-            summonTradeOpponent: postData('/Trade/SummonTradeOpponent') ,
-            cancelTrade: postData('/Trade/CancelTrade'),
-            getDepositTimeLeft: postData('/Trade/DepositeTimeLeft') ,
-            nextTradeStep: postData('/Trade/TradeStep'),
-            trackPaymentNotification: postData('/Trade/FiatPaymentStatus'),
-            checkIfDepositMade: postData('/Trade/CheckDepositMade'),
-            checkPaymentConfirmationStatus: postData('/Trade/CheckForPaymentConfirmation')
+            searchAdmissions: postData('/api/AdmissionApi/Search')
+            
         };  
 
         function postData(endpoint) {

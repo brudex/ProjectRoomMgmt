@@ -8,7 +8,6 @@ namespace ProjectRoomMgmt.Controllers
         // GET: Admission
         public ActionResult Capture() 
         {
-            //Todo Capture a form to create and addmission using the model below
             var vm = new AdmissionViewModel();
             return View(vm);
         }
@@ -19,8 +18,10 @@ namespace ProjectRoomMgmt.Controllers
             if(!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Invalid data.");
+                ViewBag.Error = "Error saving data";
                 return View(model);
             }
+            ViewBag.Success = "Data successfully saved";
             model.SaveAdmission();
             return View(model); 
         }
@@ -32,10 +33,9 @@ namespace ProjectRoomMgmt.Controllers
             return View(vm);
         }
 
-        public ActionResult Search()
+        public ActionResult Manage()
         {
-            //Todo Capture a form to search an admission by date and name of applicant 
-            var vm = new AdmissionViewModel();
+            var vm = new AdmissionViewModel();  
             return View(vm);
         }
     }

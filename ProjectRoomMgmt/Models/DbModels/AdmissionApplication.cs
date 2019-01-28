@@ -11,5 +11,6 @@ namespace ProjectRoomMgmt.Models.DbModels
         public int BioDataId { get; set; }
         public string CourseName { get; set; } //Name of course being applied for
         public string AdmissionStatus { get; set; } //Pending, Rejected, Accepted
+        public DateTime CreatedAt { get; set; } //Pending, Rejected, Accepted
     }
 }

@@ -20,6 +20,7 @@ namespace ProjectRoomMgmt.Models.DbModels
             CityOfOrigin = vm.CityOfOrigin;
             Occupation = vm.Occupation;
             OriginatingInstitute = vm.OriginatingInstitute;
+            CreatedAt= DateTime.Now;
         }
 
         public int Id { get; set; }
@@ -32,7 +33,7 @@ namespace ProjectRoomMgmt.Models.DbModels
         public string CityOfOrigin { get; set; }
         public string Occupation { get; set; }
         public string OriginatingInstitute { get; set; } //e.g., Police, Immigration etc.
-
+        public DateTime CreatedAt { get; set; }
         public void Save()
         {
             if (Id == 0)
