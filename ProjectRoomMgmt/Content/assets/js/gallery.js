@@ -13,11 +13,7 @@ $(function() {
         Wait for the images to be loaded before applying
         Isotope plugin. 
     */
-    var $gallery = $('.gallery');
-    $gallery.imagesLoaded(function() {
-        applyIsotope();
-    });
-
+   
     /*  Apply Isotope plugin 
         isotope.metafizzy.co
     */
@@ -36,7 +32,7 @@ $(function() {
         Show a sliding item using MetroJS
         http://www.drewgreenwell.com/projects/metrojs
     */
-    $(".live-tile,.flip-list").liveTile();
+    //$(".live-tile,.flip-list").liveTile();
 
 
      /* DETAIL VIEW
@@ -67,30 +63,30 @@ $(function() {
         Touch enabled slideshow for gallery item images using owlCarousel
         www.owlcarousel.owlgraphic.com
     */
-    $(".item-slideshow").owlCarousel({
-        items: 1,
-        nav: true,
-        navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
-        dots: true
-    });
+    //$(".item-slideshow").owlCarousel({
+    //    items: 1,
+    //    nav: true,
+    //    navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+    //    dots: true
+    //});
 
 
      /* FILTERS OVERLAY
     -------------------------------------------------------------*/
 
-    $('[data-toggle="filters"]').click(function() {
-        $('#filters').toggleClass('open');
-    });
+    //$('[data-toggle="filters"]').click(function() {
+    //    $('#filters').toggleClass('open');
+    //});
 
 
-    $("#slider-margin").noUiSlider({
-        start: [20, 80],
-        margin: 30,
-        connect: true,
-        range: {
-            'min': 0,
-            'max': 100
-        }
-    });
+    //$("#slider-margin").noUiSlider({
+    //    start: [20, 80],
+    //    margin: 30,
+    //    connect: true,
+    //    range: {
+    //        'min': 0,
+    //        'max': 100
+    //    }
+    //});
 
 });

@@ -12,7 +12,7 @@
         vm.model = { searchFormValid:false };
 
         vm.init = function ( ) {
-            
+            initApplicationsTable();
         };
 
         vm.findStudent = function() {
@@ -26,6 +26,46 @@
 
         }
 
-        
+        vm.newAdmission=function() {
+            $("#newAdmissionModal").modal("show");
+        }
+
+        vm.advancedSearch=function() {
+            $("#AdvancedSearchModal").modal("show");
+        }
+
+        var initApplicationsTable = function() {
+
+            var table = $('#applicationsTable');
+
+            var settings = {
+                "sDom": "t",
+                "destroy": true,
+                "paging": false,
+                "scrollCollapse": true,
+                "aoColumnDefs": [
+                    {
+                        'bSortable': false,
+                        'aTargets': [0]
+                    }
+                ],
+                "order": [
+                    [1, "desc"]
+                ]
+
+            };
+
+            table.dataTable(settings);
+
+            $('#applicationsTable input[type=checkbox]').click(function () {
+                if ($(this).is(':checked')) {
+                    $(this).closest('tr').addClass('selected');
+                } else {
+                    $(this).closest('tr').removeClass('selected');
+                }
+
+            });
+        }
+
     }
 })(jQuery);
