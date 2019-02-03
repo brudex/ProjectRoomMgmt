@@ -3,12 +3,12 @@
         .module('kaiptcapp')
         .factory('brudexservices', DataService);
     DataService.$inject = ['$http', '$location', '$window'];
-    function DataService($http, $location,$window) {
-        var baseUrl = "";      
-        return {          
-            searchAdmissions: postData('/api/AdmissionApi/Search')
-            
-        };  
+    function DataService($http, $location, $window) {
+        var baseUrl = "";
+        return {
+            searchAdmissions: postData('/api/AdmissionApi/Search'),
+            saveAdmission: postData("/api/AdmissionApi/Capture")
+        };
 
         function postData(endpoint) {
             return function (data, callback) {
@@ -28,18 +28,18 @@
         }
 
         function getData(url) {
-           
+
             return function () {
-                var callback =arguments[0];
+                var callback = arguments[0];
                 var finalUrl = '';
-                 if (arguments.length > 1) {
-                     if (typeof arguments[0] === 'object') {
-                         console.log('the first arguments >>', arguments[0]);
+                if (arguments.length > 1) {
+                    if (typeof arguments[0] === 'object') {
+                        console.log('the first arguments >>', arguments[0]);
                         finalUrl = url + "?" + $.param(arguments[0]);
                     } else {
-                         finalUrl = url + "/" + arguments[0];
-                    } 
-                    callback = arguments[1]; 
+                        finalUrl = url + "/" + arguments[0];
+                    }
+                    callback = arguments[1];
                 }
                 console.log(finalUrl);
                 doGet(finalUrl, function (err, response) {
@@ -51,34 +51,34 @@
                 });
             }
         }
-        
-        function doPost(url,data, callback) {
-             return $http.post(url, data)
+
+        function doPost(url, data, callback) {
+            return $http.post(url, data)
                 .then(function (response) {
                     if (response === null) {
-                       return callback(null, {status:"07",message :"Error in response"});
+                        return callback(null, { status: "07", message: "Error in response" });
                     }
                     return callback(null, response);
                 })
                 .catch(function (error) {
                     console.log(error);
                     callback(error);
-                }); 
+                });
         }
 
         function doGet(endpoint, callback) {
             var url = baseUrl + endpoint;
             return $http.get(url)
-               .then(function (response) {
-                   if (response === null) {
-                       return callback(null, { status: "07", message: "Error in response" });
-                   }
-                  return callback(null, response);
-               })
-               .catch(function (error) {
-                   console.log(error);
-                   return callback(error);
-               });
+                .then(function (response) {
+                    if (response === null) {
+                        return callback(null, { status: "07", message: "Error in response" });
+                    }
+                    return callback(null, response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    return callback(error);
+                });
         }
 
 

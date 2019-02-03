@@ -8,11 +8,12 @@
 <section class="row" data-ng-controller="AdmissionController as vm" data-ng-init="vm.init()">
     <div class="col-md-12">
         <div class="btn-group">
-            <button class="btn btn-primary m-r-10" data-ng-click="vm.advancedManage()">Advanced Manage</button> 
+            <button class="btn btn-primary m-r-10" data-ng-click="vm.advancedManage()">Advanced Manage</button>
+            <button class="btn btn-primary m-r-10" data-ng-click="vm.newAdmission()">New Admission</button>
         </div>
     </div>
     <div class="col-md-12">
-  
+
         <div class="table-responsive">
             <table class="table table-hover table-striped" id="applicationsTable">
                 <thead>
@@ -22,120 +23,332 @@
                                 <i class="pg-trash"></i>
                             </button>
                         </th>
-                        <th style="width:15%">Actions</th>
+                    
                         <th style="width:20%">Applicant Name</th>
-                        <th style="width:20%">CountryOfOrigin</th>
-                        <th style="width:20%">OriginatingInstitute</th>
-                        <th style="width:10%">CourseName</th>
-                        <th style="width:10%">AdmissionStatus</th>
+                        <th style="width:20%">Country Of Origin</th>
+                        <th style="width:20%">Originating Institute</th>
+                        <th style="width:10%">Course Name</th>
+                        <th style="width:10%">Admission Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                          
-                        <td class="v-align-middle ">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-warning">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                                <button type="button" class="btn btn-danger">
-                                    <i class="fa fa-trash-o"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td style="width:15%">Actions</td>
-                        <td style="width:20%" data-ng-bind="vm.searchResults.FullName">Applicant Name</td>
-                        <td style="width:20%" data-ng-bind="vm.searchResults.CountryOfOrigin">CountryOfOrigin</td>
-                        <td style="width:20%" data-ng-bind="vm.searchResults.OriginatingInstitute">OriginatingInstitute</td>
-                        <td style="width:10%" data-ng-bind="vm.searchResults.CourseName">CourseName</td>
-                        <td style="width:10%" data-ng-bind="vm.searchResults.AdmissionStatus">AdmissionStatus</td> 
+                    <tr data-ng-repeat="result in vm.searchResult">
+                        <td style="width:15%"><div class="btn-group">
+                            <button type="button" class="btn btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </div></td>
+                        <td style="width:20%" data-ng-bind="result.FullName">Applicant Name</td>
+                        <td style="width:20%" data-ng-bind="result.CountryOfOrigin">CountryOfOrigin</td>
+                        <td style="width:20%" data-ng-bind="result.OriginatingInstitute">OriginatingInstitute</td>
+                        <td style="width:10%" data-ng-bind="result.CourseName">CourseName</td>
+                        <td style="width:10%" data-ng-bind="result.AdmissionStatus">AdmissionStatus</td>
                     </tr>
 
                 </tbody>
             </table>
         </div>
     </div>
-</section>
 
 
 
-<div class="modal fade slide-up disable-scroll" id="newAdmissionModal" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog ">
-        <div class="modal-content-wrapper">
-            <div class="modal-content">
-                <div class="modal-header clearfix text-left">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <i class="pg-close fs-14"></i>
-                    </button>
-                    <h5>New  <span class="semi-bold">Admission</span></h5>
-                    <p class="p-b-10">Please complete the form to add a new applicant.</p>
-                </div>
-                <div class="modal-body">
-                    <form role="form" novalidate="" name="applicantForm">
-                        <fieldset>
-                            <div class="form-group-attached m-b-10">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-group-default">
-                                            <label>First Name</label>
-                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.firstName">
-                                        </div>
+
+    <div class="modal fade slide-up disable-scroll" id="newAdmissionModal" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content-wrapper">
+                <div class="modal-content" style="width: 1050px">
+                    <div class="modal-header clearfix text-left">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="pg-close fs-14"></i>
+                        </button>
+                        <h5>New  <span class="semi-bold">Admission</span></h5>
+                        <p class="p-b-10">Please complete the form to add a new applicant.</p>
+                    </div>
+                    <div class="modal-body" style="margin-top: -60px">
+                        <form>
+                            <div id="rootwizard" class="m-t-50">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#tab1"><i class="fa fa-shopping-cart tab-icon"></i> <span>Personal Information</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a data-toggle="tab" href="#tab2"><i class="fa fa-truck tab-icon"></i> <span>Education History</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a data-toggle="tab" href="#tab3"><i class="fa fa-credit-card tab-icon"></i> <span>Work Experience</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a data-toggle="tab" href="#tab4"><i class="fa fa-credit-card tab-icon"></i> <span>Documents Upload</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a data-toggle="tab" href="#tab5"><i class="fa fa-check tab-icon"></i> <span>Summary</span></a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+
+                                    <div class="tab-pane padding-20 active slide-left" id="tab1">
+                                        <fieldset>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>First Name</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.firstName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Last Name</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.lastName">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Nationality</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.nationality">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Country of birth</label>
+                                                            <input type="text" class="form-control" data-ng-model="vm.applicationModel.countryOfBirth">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Occupation</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.occupation">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Originating Institute</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.originatingInstitute">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-group-default">
-                                            <label>Last Name</label>
-                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.lastName">
-                                        </div>
+                                    <div class="tab-pane padding-20 slide-left" id="tab2">
+                                        <fieldset>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>First Name</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.firstName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Last Name</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.lastName">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Nationality</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.nationality">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Country of birth</label>
+                                                            <input type="text" class="form-control" data-ng-model="vm.applicationModel.countryOfBirth">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Occupation</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.occupation">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Originating Institute</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.originatingInstitute">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+
+                                    </div>
+
+                                    <div class="tab-pane padding-20 slide-left" id="tab3">
+                                        <fieldset>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>First Name</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.firstName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Last Name</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.lastName">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Nationality</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.nationality">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Country of birth</label>
+                                                            <input type="text" class="form-control" data-ng-model="vm.applicationModel.countryOfBirth">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Occupation</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.occupation">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Originating Institute</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.originatingInstitute">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+
+                                    </div>
+
+                                    <div class="tab-pane padding-20 slide-left" id="tab4">
+
+                                        <fieldset>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>First Name</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.firstName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Last Name</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.lastName">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Nationality</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.Nationality">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Country of birth</label>
+                                                            <input type="text" class="form-control" data-ng-model="vm.applicationModel.CountryOfBirth">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-attached m-b-10">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Occupation</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.Occupation">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group form-group-default">
+                                                            <label>Originating Institute</label>
+                                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.OriginatingInstitute">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+
+                                    </div>
+                                    <div class="tab-pane padding-20 active slide-left" id="tab5">
+                                        summary here
+                                    </div>
+                                    <div class="padding-20 bg-white">
+                                        <ul class="pager wizard">
+                                            <li class="next">
+                                                <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
+                                                    <span>Next</span>
+                                                </button>
+                                            </li>
+                                            <li class="next finish hidden">
+                                                <button data-ng-click="vm.saveAdmission()" class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                                                    <span>Finish</span>
+                                                </button>
+                                            </li>
+                                            <li class="previous first hidden">
+                                                <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                                                    <span>First</span>
+                                                </button>
+                                            </li>
+                                            <li class="previous">
+                                                <button class="btn btn-default btn-cons pull-right" type="button">
+                                                    <span>Previous</span>
+                                                </button>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group-attached m-b-10">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-group-default">
-                                            <label>Nationality</label>
-                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.nationality">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-group-default">
-                                            <label>Country of birth</label>
-                                            <input type="text" class="form-control" data-ng-model="vm.applicationModel.countryOfBirth">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group-attached m-b-10">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-group-default">
-                                            <label>Occupation</label>
-                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.occupation">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-group-default">
-                                            <label>Originating Institute</label>
-                                            <input type="text" class="form-control" required="" data-ng-model="vm.applicationModel.originatingInstitute">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </fieldset>
-                    </form>
-                    <div class="row">
-
-                        <div class="col-sm-4 m-t-10 sm-m-t-10">
-                            <button type="button" title="Please complete the " class="btn btn-primary btn-block m-t-5" data-ng-disabled="applicantForm.$invalid">Save</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
     </div>
-</div>
+
+</section>
+
+
 
 <div class="modal fade slide-up disable-scroll" id="AdvancedSearchModal" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog ">

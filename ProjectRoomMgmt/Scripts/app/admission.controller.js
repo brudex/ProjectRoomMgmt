@@ -4,25 +4,25 @@
     angular
         .module('kaiptcapp')
         .controller('AdmissionController', AdmissionController);
-    AdmissionController.$inject = ['brudexservices', '$location', '$window', 'brudexutils'];
-    function AdmissionController(services, location, $window, utils) {
+    AdmissionController.$inject = ['brudexservices', '$location', '$window', 'brudexutils', 'NotificationService'];
+    function AdmissionController(services, location, $window, utils, NotificationService) {
         var vm = this;
         vm.errorMsg = [];
         vm.successMsg = [];
         vm.searchResult = [];
-        vm.model = { searchFormValid: false ,searchMode : 'list'};
+        vm.model = { searchFormValid: false, searchMode: 'list' };
 
         vm.init = function () {
-            //getAdmissions();
+            getAdmissions();
 
         };
 
         function getAdmissions() {
             var payload = vm.model;
-            services.searchAdmissions(payload, function(response) {
-                 if(response.status === "00") {
-                     vm.searchResult = response.data;
-                 }
+            services.searchAdmissions(payload, function (response) {
+                if (response.status === "00") {
+                    vm.searchResult = response.data;
+                }
             });
         }
 
@@ -38,6 +38,13 @@
 
         vm.newAdmission = function () {
             $("#newAdmissionModal").modal("show");
+        }
+
+        vm.saveAdmission = function () {
+            services.saveAdmission(vm.applicationModel,
+                function (response) {
+                    console.log(response);
+                });
         }
 
         vm.advancedSearch = function () {

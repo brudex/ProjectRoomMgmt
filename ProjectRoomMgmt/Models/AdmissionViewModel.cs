@@ -25,7 +25,7 @@ namespace ProjectRoomMgmt.Models
          
 
 
-        public void SaveAdmission()
+        public int SaveAdmission()
         {
             var biodata = new ApplicantBioData(this);
             biodata.Save();
@@ -34,7 +34,7 @@ namespace ProjectRoomMgmt.Models
             admission.CreatedAt = DateTime.Now;
             admission.BioDataId = biodata.Id;
             admission.AdmissionStatus = Constants.AdmissionStatus.Pending;
-            DbHandler.Instance.Save(admission); 
+           return DbHandler.Instance.Save(admission); 
         }
 
         public static ServiceResponse SearchAdmissions(JObject data)
