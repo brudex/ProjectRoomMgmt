@@ -32,6 +32,7 @@
             services.findStudent(payload, function (response) {
                 if (response.status === "00") {
                     vm.searchResult = response.data;
+                    
                 }
             });
         }

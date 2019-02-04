@@ -22,7 +22,19 @@ namespace ProjectRoomMgmt.Models
         public string OriginatingInstitute { get; set; } //e.g., Police, Immigration etc.
         public string CourseName { get; set; } //Name of course being applied for
         public string AdmissionStatus { get; set; } //Pending, Rejected, Accepted
-         
+
+        public string Gender { get; set; }
+        public string Mobile { get; set; }
+        public string PrimaryContactMobile { get; set; }
+        public  string PrimaryContactName { get; set; }
+        public string EmailAddress { get; set; }
+        public string HomeAddress { get; set; }
+        public string PostalAddress { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
+
+
+
 
 
         public int SaveAdmission()
