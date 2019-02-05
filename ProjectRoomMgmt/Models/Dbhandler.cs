@@ -8,7 +8,8 @@ using System.Linq;
 using System.Text;
 using Dapper;
 using DapperExtensions;
- 
+using ProjectRoomMgmt.Models.DbModels;
+
 
 namespace ProjectRoomMgmt.Models
 {
@@ -71,7 +72,13 @@ namespace ProjectRoomMgmt.Models
             }
         }
 
-
+        public T GetById<T>(int Id) where T : class
+        {
+            using (var conn = GetOpenDefaultDbConnection())
+            {
+                return conn.Get<T>(Id);
+            }
+        }
         public List<AdmissionViewModel> GetAdmissions(int limit=100)
         {
             using (var conn = GetOpenDefaultDbConnection())
@@ -109,6 +116,17 @@ namespace ProjectRoomMgmt.Models
                 string sql =
                     "select a.*,b.* from AdmissionApplication a inner join ApplicantBioData b on a.BioDataId=b.Id where a.AdmissionStatus=@status  order by a.Id desc";
                 return conn.Query<AdmissionViewModel>(sql, new { status }).ToList();
+            }
+        }
+
+
+        public List<TrainingStudent> GetTrainingStudents(int limit)
+        {
+            using (var conn = GetOpenDefaultDbConnection())
+            {
+                string sql =
+                    "select top "+limit+" * from  TrainingStudent order by a.Id desc ";
+                return conn.Query<TrainingStudent>(sql).ToList();
             }
         }
     }

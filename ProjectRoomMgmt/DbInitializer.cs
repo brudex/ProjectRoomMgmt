@@ -17,7 +17,7 @@ namespace ProjectRoomMgmt
             Bcf<Room>.Migrate();
             Bcf<RoomBooking>.Migrate();
             Bcf<TrainingStudent>.Migrate();
-            BrudexCodeFirst.RunMigrations("DefaultConnection",true,ConnectionType.SqlServer,MigrationOptions.RecreateOnlyChangedModels);
+           BrudexCodeFirst.RunMigrations("DefaultConnection",true,ConnectionType.SqlServer,MigrationOptions.RecreateOnlyChangedModels);
         }
     }
 }

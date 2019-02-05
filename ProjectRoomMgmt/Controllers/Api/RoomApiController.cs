@@ -14,7 +14,7 @@ namespace ProjectRoomMgmt.Controllers.Api
         public ServiceResponse RoomBooking([FromBody]JObject data)
         {
             var handler = new RoomViewModel(data);
-           var response =  handler.DoRoomBooking();
+            var response =  handler.DoRoomBooking();
             return response;
             
         }

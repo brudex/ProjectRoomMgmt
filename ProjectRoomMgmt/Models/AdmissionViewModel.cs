@@ -32,10 +32,7 @@ namespace ProjectRoomMgmt.Models
         public string PostalAddress { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-
-
-
-
+         
 
         public int SaveAdmission()
         {

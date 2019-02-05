@@ -42,5 +42,22 @@ namespace ProjectRoomMgmt.Controllers.Api
 
         }
 
+        [HttpPost]
+        [Route("api/AdmissionApi/Capture")]
+        public ServiceResponse SetAdmissionStatus(AdmissionStatusViewModel model)
+        {
+            try
+            {
+                _response = model.UpdateAdmissonStatus();
+            }
+            catch (Exception e)
+            {
+                _response = new ServiceResponse("False", e.Message);
+            }
+
+            return _response;
+
+        }
+
     }
 }

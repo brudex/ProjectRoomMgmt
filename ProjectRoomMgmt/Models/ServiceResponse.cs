@@ -22,10 +22,10 @@ namespace ProjectRoomMgmt.Models
             //Message = "Ok" = Data != null;
         }
 
-        public ServiceResponse(string Status,string Message)
+        public ServiceResponse(string status,string Message)
         {
             this.Message = Message;
-            this.Status = Status;
+            this.Status = status;
         }
     }
 }
