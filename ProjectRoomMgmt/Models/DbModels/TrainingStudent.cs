@@ -5,23 +5,19 @@ namespace ProjectRoomMgmt.Models.DbModels
 {
     public class TrainingStudent
     {
-        private AdmissionApplication applicant;
-
-        public TrainingStudent()
-        {}
+        public TrainingStudent(){}
 
         public TrainingStudent(AdmissionApplication applicant)
-        {
-            this.applicant = applicant;
+        { 
             BioDataId = applicant.BioDataId;
-            StudentNo = "56789";
+            StudentNo = Constants.GetUniqueStudentNo();
             CourseName = applicant.CourseName;
             CreatedAt = DateTime.Now; 
         }
 
         public int Id { get; set; }
         public int BioDataId { get; set; }
-        public string StudentNo { get; set; }
+        public int StudentNo { get; set; }
         public string CourseName { get; set; }
         public DateTime CreatedAt { get; set; }
 

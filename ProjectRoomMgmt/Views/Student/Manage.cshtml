@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Manage Students";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout_Main.cshtml";
 }
 
 <h2>Manage Students</h2>
@@ -22,37 +22,52 @@
         </div>
     </div>
     <div class="col-md-12">
-
         <div class="row" data-ng-show="vm.model.searchMode == 'bydate'">
             <label class="col-md-3">Manage Date</label>
             <div class="col-md-4">
-                <input type="text" placeholder="From Date" data-ng-model="vm.model.fromDate"/>
+                <input type="text" class="form-control"  placeholder="From Date" data-ng-model="vm.model.fromDate"/>
             </div>
             <div class="col-md-4">
-                <input type="text" placeholder="To Date" data-ng-model="vm.model.fromDate"/>
+                <input type="text" class="form-control"  placeholder="To Date" data-ng-model="vm.model.fromDate"/>
             </div>
         </div>
         <div class="row" data-ng-show="vm.model.searchMode == 'byword'">
             <label class="col-md-3">Manage by name or student no.</label>
             <div class="col-md-4">
-                <input type="text" placeholder="Enter name or student no." data-ng-model="vm.model.searchText"/>
+                <input type="text" class="form-control" placeholder="Enter name or student no." data-ng-model="vm.model.searchText"/>
             </div>
         </div>
         <button class="btn btn-success">Find Student</button>
     </div>
+ 
 
     <div class="col-md-12">
-        <table>
+        <table class="table">
             <thead>
-            <tr>
-                <td>Full Name</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+                <tr>
+                    <td>Full Name</td>
+                    <td>Student No</td>
+                    <td>Course Name</td>
+                    <td>CountryOfOrigin</td>
+                    <td>Occupation</td>
+                    <td>PrimaryContactMobile</td>
+                    <td></td>
+                </tr>
             </thead>
             <tbody>
-            
+                <tr data-ng-repeat="item in vm.searchResult">
+                    <td data-ng-bind="item.FullName">Full Name</td>
+                    <td data-ng-bind="item.StudentNo">Student No</td>
+                    <td data-ng-bind="item.CourseName">Course Name</td>
+                    <td data-ng-bind="item.CountryOfOrigin">CountryOfOrigin</td>
+                    <td data-ng-bind="item.Occupation">Occupation</td>
+                    <td data-ng-bind="item.PrimaryContactMobile">PrimaryContactMobile</td>
+                    <td>
+                        <button class="btn btn-xs btn-primary">Allocate Room</button>
+                        <button class="btn btn-xs btn-primary">Deactivate Student</button>
+                        <button class="btn btn-xs btn-primary">Assign Transport</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

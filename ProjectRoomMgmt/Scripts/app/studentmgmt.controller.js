@@ -12,7 +12,7 @@
         vm.model = { searchFormValid: false };
 
         vm.init = function () {
-            initApplicationsTable();
+             
         };
 
         vm.findStudent = function () {

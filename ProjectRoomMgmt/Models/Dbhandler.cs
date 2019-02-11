@@ -99,6 +99,17 @@ namespace ProjectRoomMgmt.Models
             }
         }
 
+
+        public List<StudentViewModel> SearchStudentsByDate(string fromDate, string toDate)
+        {
+            using (var conn = GetOpenDefaultDbConnection())
+            {
+                string sql =
+                    "select a.*,b.* from TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id where a.Created >= @fromDate and a.CreatedAt <= @toDate  order by a.Id desc";
+                return conn.Query<StudentViewModel>(sql, new { fromDate, toDate }).ToList();
+            }
+        }
+
         public List<AdmissionViewModel> SearchAdmissionsByDescription(string text)
         {
             using (var conn = GetOpenDefaultDbConnection())
@@ -108,6 +119,29 @@ namespace ProjectRoomMgmt.Models
                 return conn.Query<AdmissionViewModel>(sql).ToList();
             }
         }
+
+
+        public List<StudentViewModel> SearchStudentByDescription(string text)
+        {
+            using (var conn = GetOpenDefaultDbConnection())
+            {
+                string sql =
+                    string.Format("select a.*,b.* from TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id where b.FullName like '%{0}%'  order by a.Id desc", text);
+                return conn.Query<StudentViewModel>(sql).ToList();
+            }
+        }
+
+        public List<StudentViewModel> SearchStudentByNo(string studentNo)
+        {
+            using (var conn = GetOpenDefaultDbConnection())
+            {
+                string sql =
+                    "select a.*,b.* from TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id where a.StudentNo=@studentNo  order by a.Id desc";
+                return conn.Query<StudentViewModel>(sql, new { studentNo }).ToList();
+            }
+        }
+
+
 
         public List<AdmissionViewModel> SearchAdmissionsByStatus(string status)
         {
@@ -120,13 +154,22 @@ namespace ProjectRoomMgmt.Models
         }
 
 
-        public List<TrainingStudent> GetTrainingStudents(int limit)
+        public List<StudentViewModel> GetTrainingStudents(int limit)
         {
             using (var conn = GetOpenDefaultDbConnection())
             {
                 string sql =
-                    "select top "+limit+" * from  TrainingStudent order by a.Id desc ";
-                return conn.Query<TrainingStudent>(sql).ToList();
+                    "select top "+limit+ " * from  TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id order by a.Id desc ";
+                return conn.Query<StudentViewModel>(sql).ToList();
+            }
+        }
+
+        public int GetMaxStudentNo()
+        {
+            using (var conn = GetOpenDefaultDbConnection())
+            {
+                string sql = "select max(StudentNo) 'int' from TrainingStudent" ;
+                return conn.Query<int>(sql).FirstOrDefault();
             }
         }
     }

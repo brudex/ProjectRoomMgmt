@@ -1657,7 +1657,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>20514</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:20514/</IISUrl>
+          <IISUrl>http://localhost:10515/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
