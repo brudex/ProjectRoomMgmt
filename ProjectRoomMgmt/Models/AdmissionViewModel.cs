@@ -37,6 +37,7 @@ namespace ProjectRoomMgmt.Models
         public int SaveAdmission()
         {
             var biodata = new ApplicantBioData(this);
+
             biodata.Save();
             var admission = new AdmissionApplication();
             admission.CourseName = CourseName;

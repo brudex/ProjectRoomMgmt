@@ -8,7 +8,7 @@
 <h2>Manage Students</h2>
 
 
-<div class="row" data-ng-controller="StudentMgmtController as vm">
+<div class="row" data-ng-controller="StudentMgmtController as vm" data-ng-init="vm.init()">
     <div class="col-md-12">
         <div class="form-group">
             <label class="col-md-3">Manage Mode</label>
@@ -37,7 +37,7 @@
                 <input type="text" class="form-control" placeholder="Enter name or student no." data-ng-model="vm.model.searchText"/>
             </div>
         </div>
-        <button class="btn btn-success">Find Student</button>
+        <button class="col-sm-offset-4 btn btn-success" data-ng-click="vm.findStudents()">Find Student</button>
     </div>
  
 

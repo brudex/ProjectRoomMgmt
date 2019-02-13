@@ -15,6 +15,8 @@ namespace ProjectRoomMgmt.Controllers.Api
 
         public AdmissionApiController() { }
 
+        [HttpPost]
+        [Route("api/AdmissionApi/Search")]
         public ServiceResponse Search([FromBody]JObject data)
         {
             return AdmissionViewModel.SearchAdmissions(data);
@@ -26,12 +28,12 @@ namespace ProjectRoomMgmt.Controllers.Api
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
+//                if (!ModelState.IsValid)
+//                {
                     var result = model.SaveAdmission();
                     _response = new ServiceResponse(result);
 
-                }
+//                }
             }
             catch (Exception e)
             {
@@ -43,8 +45,7 @@ namespace ProjectRoomMgmt.Controllers.Api
         }
 
         [HttpPost]
-        [Route("api/AdmissionApi/Capture")]
-        public ServiceResponse SetAdmissionStatus(AdmissionStatusViewModel model)
+       public ServiceResponse SetAdmissionStatus(AdmissionStatusViewModel model)
         {
             try
             {
