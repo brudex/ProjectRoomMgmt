@@ -172,5 +172,33 @@ namespace ProjectRoomMgmt.Models
                 return conn.Query<int>(sql).FirstOrDefault();
             }
         }
+
+        public StudentViewModel GetTrainingStudentByNo(string studentNo)
+        {
+            using (var conn = GetOpenDefaultDbConnection())
+            {
+                string sql =
+                    "select top " + 1 + " a.*,a.Id 'StudentId',b.* from  TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id where a.StudentNo=@studentNo order by a.Id desc";
+                return conn.Query<StudentViewModel>(sql,new {studentNo}).FirstOrDefault();
+            }
+        }
+
+        public List<Room> GetAllRooms()
+        {
+            using (var conn = GetOpenDefaultDbConnection())
+            {
+                string sql = "select * from Room";
+                return conn.Query<Room>(sql).ToList();
+            }
+        }
+
+        public List<RoomBooking> GetRoomBookingsByRoomId(int id)
+        {
+            using (var conn = GetOpenDefaultDbConnection())
+            {
+                string sql = "select * from RoomBooking where RoomId=@id and Active=1";
+                return conn.Query<RoomBooking>(sql,new {id}).ToList();
+            }
+        }
     }
 }

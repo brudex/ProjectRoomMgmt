@@ -14,8 +14,12 @@
         
 
         vm.init = function () {
-           
-
+            vm.model.studentNo = $("#__studentNo__").val();
+            vm.model.roomNo = $("#__roomNo__").val();
+            if (vm.model.studentNo) {
+                verifyStudentInfoByNo(vm.model.studentNo);
+            }
+            getAvailableRooms();
         };
 
         function verifyStudentInfoByNo(studentNo) {
@@ -28,22 +32,23 @@
             });
         }
 
-        function getRoomInfoByNo(roomNo) {
-            var payload = {};
-            payload.roomNo = roomNo;
-            services.getRoomInfoByNo(payload, function (response) {
+        function getAvailableRooms() {
+            services.getAvailableRooms(function (response) {
+                console.log('the response from getavailable rooms', response);
                 if (response.Status === "00") {
-                    vm.model.roomNo = response.Message;
+                    vm.rooms = response.data;
                 }
             });
         }
 
 
         vm.allocateRoom = function () {
-            services.saveAdmission(vm.applicationModel,
-                function (response) {
-                    console.log(response);
-                });
+            var payload = vm.model;
+            services.bookRoom(payload, function(response) {
+                if (response.Status === "00") {
+                    utils.alertSuccess("Room successfully allocated");
+                }
+            }); 
         }
 
          

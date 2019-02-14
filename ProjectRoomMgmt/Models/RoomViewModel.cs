@@ -11,16 +11,41 @@ namespace ProjectRoomMgmt.Models
     {
         public  string StudentNo { get; set; }
         public  string RoomNo { get; set; }
+        public  int RoomId{ get; set; }
+        public  DateTime EvacuationDate{ get; set; }
         public RoomViewModel() { }
-        public RoomViewModel(JObject data)
-        {
-            throw new NotImplementedException();
-        }
+        
 
-        public ServiceResponse DoRoomBooking()
+        public ServiceResponse DoRoomBooking(JObject data)
         {
-                var booking = new RoomBooking();
-            return null;
+            RoomId = data["roomId"].ToInteger();
+            StudentNo = data["studentNo"].ToStringOrEmpty();
+            EvacuationDate = data["evacuationDate"].ToDateTime();
+            var response = new ServiceResponse();
+            response.Status = "03";
+            var room = DbHandler.Instance.GetById<Room>(RoomId);
+            var roomAllocations = DbHandler.Instance.GetRoomBookingsByRoomId(room.Id);
+            var student = DbHandler.Instance.GetTrainingStudentByNo(StudentNo);
+            if (room.Capacity > roomAllocations.Count)
+            {
+                if (student != null)
+                {
+                    var booking = new RoomBooking();
+                    booking.Active = true;
+                    booking.RoomId = room.Id;
+                    booking.BookingDate=DateTime.Now;
+                    // booking.BookingStatus = "Active";
+                    booking.StudentNo = StudentNo;
+                    booking.TrainingStudentId = student.StudentId;
+                    booking.ExpectedVacationDate = EvacuationDate;
+                    DbHandler.Instance.Save(booking);
+                    response.Status = "00";
+                    response.Message = "Booking successful";
+                } 
+
+            }
+         
+            return response;
         }
     }
 }

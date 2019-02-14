@@ -10,6 +10,8 @@
             setAdmissionStatus: postData("/api/AdmissionApi/SetAdmissionStatus"),
             saveAdmission: postData("/api/AdmissionApi/Capture"),
             findStudent: postData("/api/StudentApi/SearchStudents"),
+            getStudentInfoByNo: postData("/api/StudentApi/StudentInfo"),
+            getAvailableRooms: getData("/api/RoomApi/GetAvailableRooms"),
           
         };
 
@@ -34,7 +36,7 @@
 
             return function () {
                 var callback = arguments[0];
-                var finalUrl = '';
+                var finalUrl = url;
                 if (arguments.length > 1) {
                     if (typeof arguments[0] === 'object') {
                         console.log('the first arguments >>', arguments[0]);
@@ -45,7 +47,7 @@
                     callback = arguments[1];
                 }
                 console.log(finalUrl);
-                doGet(finalUrl, function (err, response) {
+                doGet(url, function (err, response) {
                     if (err) {
                         console.error(err);
                         return;

@@ -42,7 +42,6 @@ namespace ProjectRoomMgmt.Models.DbModels
         public string CityOfOrigin { get; set; }
         public string Occupation { get; set; }
         public string OriginatingInstitute { get; set; } //e.g., Police, Immigration etc.
-        public DateTime CreatedAt { get; set; }
         public string Gender { get; set; }
         public string Mobile { get; set; }
         public string PrimaryContactMobile { get; set; }
@@ -51,6 +50,7 @@ namespace ProjectRoomMgmt.Models.DbModels
         public string HomeAddress { get; set; }
         public string PostalAddress { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public void Save()
         {

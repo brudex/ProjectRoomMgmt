@@ -19,6 +19,28 @@ namespace ProjectRoomMgmt.Controllers.Api
         }
 
 
+
+
+        [HttpPost]
+        public ServiceResponse StudentInfo(JObject data)
+        {
+            string studentNo = data["studentNo"].ToStringOrEmpty();
+            var student = DbHandler.Instance.GetTrainingStudentByNo(studentNo);
+            var response = new ServiceResponse();
+            if (student != null)
+            {
+                response.Message = student.FullName;
+                response.Status = "00";
+                response.data = student;
+            }
+            else
+            {
+                response.Status = "03";
+            }
+             return response;
+        }
+
+
         [HttpPost]
         public ServiceResponse SearchStudents(JObject data)
         {

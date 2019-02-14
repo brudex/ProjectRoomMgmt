@@ -1,5 +1,4 @@
-﻿
-(function ($) {
+﻿(function ($) {
     'use strict';
     angular
         .module('kaiptcapp')
@@ -13,8 +12,7 @@
         vm.model = { searchFormValid: false, searchMode: 'list' };
 
         vm.init = function () {
-            getAdmissions();
-
+            getAdmissions(); 
         };
 
         function getAdmissions() {

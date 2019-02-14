@@ -10,6 +10,7 @@ namespace ProjectRoomMgmt.Models
 {
     public class StudentViewModel
     {
+        public int StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string OtherNames { get; set; }
