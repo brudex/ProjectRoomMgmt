@@ -84,7 +84,7 @@ namespace ProjectRoomMgmt.Models
             using (var conn = GetOpenDefaultDbConnection())
             {
                 string sql =
-                    "select top "+limit+" a.*,b.* from AdmissionApplication a inner join ApplicantBioData b on a.BioDataId=b.Id order by a.Id desc";
+                    "select top "+limit+ " a.*,b.* ,a.Id 'AdmissionId' from AdmissionApplication a inner join ApplicantBioData b on a.BioDataId=b.Id order by a.Id desc";
                 return conn.Query<AdmissionViewModel>(sql).ToList();
             }
         }
@@ -94,7 +94,7 @@ namespace ProjectRoomMgmt.Models
             using (var conn = GetOpenDefaultDbConnection())
             {
                 string sql =
-                    "select a.*,b.* from AdmissionApplication a inner join ApplicantBioData b on a.BioDataId=b.Id where a.Created >= @fromDate and a.CreatedAt <= @toDate  order by a.Id desc";
+                    "select a.*,b.*,a.Id 'AdmissionId'  from AdmissionApplication a inner join ApplicantBioData b on a.BioDataId=b.Id where a.Created >= @fromDate and a.CreatedAt <= @toDate  order by a.Id desc";
                 return conn.Query<AdmissionViewModel>(sql,new {fromDate,toDate}).ToList();
             }
         }
@@ -115,7 +115,7 @@ namespace ProjectRoomMgmt.Models
             using (var conn = GetOpenDefaultDbConnection())
             {
                 string sql =
-                    string.Format("select a.*,b.* from AdmissionApplication a inner join ApplicantBioData b on a.BioDataId=b.Id where b.FullName like '%{0}%'  order by a.Id desc",text);
+                    string.Format("select a.*,b.*,a.Id 'AdmissionId'  from AdmissionApplication a inner join ApplicantBioData b on a.BioDataId=b.Id where b.FullName like '%{0}%'  order by a.Id desc", text);
                 return conn.Query<AdmissionViewModel>(sql).ToList();
             }
         }

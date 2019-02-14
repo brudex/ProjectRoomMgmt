@@ -18,7 +18,9 @@ namespace ProjectRoomMgmt.Controllers.Api
             return response;
         }
 
-        public static ServiceResponse SearchStudents(JObject data)
+
+        [HttpPost]
+        public ServiceResponse SearchStudents(JObject data)
         {
             var response = new ServiceResponse();
             response.Status = "00";

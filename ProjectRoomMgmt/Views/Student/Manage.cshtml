@@ -1,19 +1,21 @@
 ﻿@model dynamic
+
 @{
     ViewBag.Title = "Manage Students";
     Layout = "~/Views/Shared/_Layout_Main.cshtml";
 }
 
-<h2>Manage Students</h2> 
-<div class="row" data-ng-controller="StudentMgmtController as vm">
+<h2>Manage Students</h2>
+ 
+<div class="row" data-ng-controller="StudentMgmtController as vm" data-ng-init="vm.init()">
     <div class="col-md-12">
         <div class="form-group">
             <label class="col-md-3">Manage Mode</label>
             <div class="col-md-3">
-                <input type="radio" value="bydate" data-ng-model="vm.model.searchMode" /> Manage by Date
+                <input type="radio" value="bydate" data-ng-model="vm.model.searchMode"/> Manage by Date
             </div>
             <div class="col-md-3">
-                <label><input type="radio" value="byword" data-ng-model="vm.model.searchMode" /> By Name or Student No.</label>
+                <label><input type="radio" value="byword" data-ng-model="vm.model.searchMode"/> By Name or Student No.</label>
             </div> 
         </div>
     </div>
@@ -21,26 +23,21 @@
         <div class="row" data-ng-show="vm.model.searchMode == 'bydate'">
             <label class="col-md-3">Manage Date</label>
             <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="From Date" data-ng-model="vm.model.fromDate" />
+                <input type="text" class="form-control"  placeholder="From Date" data-ng-model="vm.model.fromDate"/>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="To Date" data-ng-model="vm.model.fromDate" />
+                <input type="text" class="form-control"  placeholder="To Date" data-ng-model="vm.model.fromDate"/>
             </div>
         </div>
         <div class="row" data-ng-show="vm.model.searchMode == 'byword'">
             <label class="col-md-3">Manage by name or student no.</label>
             <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="Enter name or student no." data-ng-model="vm.model.searchText" />
+                <input type="text" class="form-control" placeholder="Enter name or student no." data-ng-model="vm.model.searchText"/>
             </div>
         </div>
-        <div class="row">
-            <label class="col-md-3"></label>
-            <div class="col-md-4">
-                <button class="btn btn-success" type="button" data-ng-click="vm.findStudent()">Search</button>
-            </div>
-        </div> 
+        <button class="col-sm-offset-4 btn btn-success" data-ng-click="vm.findStudents()">Find Student</button>
     </div>
-     
+  
     <div class="col-md-12">
         <table class="table">
             <thead>

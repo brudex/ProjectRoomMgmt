@@ -10,6 +10,7 @@ namespace ProjectRoomMgmt.Models
 {
     public class AdmissionViewModel
     {
+        public int AdmissionId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string OtherNames { get; set; }
@@ -37,6 +38,7 @@ namespace ProjectRoomMgmt.Models
         public int SaveAdmission()
         {
             var biodata = new ApplicantBioData(this);
+
             biodata.Save();
             var admission = new AdmissionApplication();
             admission.CourseName = CourseName;

@@ -12,8 +12,12 @@ namespace ProjectRoomMgmt.Controllers
         // GET: Room
         public ActionResult RoomAllocation()
         {
+            var studentNo = Request.QueryString["studentNo"];
+            var roomNo = Request.QueryString["roomNo"];
             var vm = new RoomViewModel();
-            return View();
+            vm.StudentNo = studentNo;
+            vm.RoomNo = roomNo;
+            return View(vm);
         }
 
         // GET: Room

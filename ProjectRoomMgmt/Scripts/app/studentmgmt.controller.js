@@ -9,16 +9,28 @@
         vm.errorMsg = [];
         vm.successMsg = [];
         vm.searchResult = [];
-        vm.model = { searchFormValid: false };
+        vm.model = { };
 
         vm.init = function () {
-             
+            listRecentStudents();
         };
+
+
+
+        function listRecentStudents() {
+            var payload = { searchMode: "list" ,limit:100};
+            services.findStudent(payload, function (response) {
+                 
+                    if (response.Status === "00") {
+                        vm.searchResult = response.data;
+                    }
+                }); 
+        }
 
         vm.findStudent = function () {
             var payload = vm.model;
             services.findStudent(payload, function (response) {
-                if (response.status === "00") {
+                if (response.Status === "00") {
                     vm.searchResult = response.data;
                 }
             });

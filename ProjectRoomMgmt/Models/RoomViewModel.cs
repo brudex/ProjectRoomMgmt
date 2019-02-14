@@ -9,6 +9,8 @@ namespace ProjectRoomMgmt.Models
 {
     public class RoomViewModel
     {
+        public  string StudentNo { get; set; }
+        public  string RoomNo { get; set; }
         public RoomViewModel() { }
         public RoomViewModel(JObject data)
         {

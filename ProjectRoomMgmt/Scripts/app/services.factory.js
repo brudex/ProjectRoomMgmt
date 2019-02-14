@@ -7,7 +7,10 @@
         var baseUrl = "";
         return {
             searchAdmissions: postData('/api/AdmissionApi/Search'),
-            saveAdmission: postData("/api/AdmissionApi/Capture")
+            setAdmissionStatus: postData("/api/AdmissionApi/SetAdmissionStatus"),
+            saveAdmission: postData("/api/AdmissionApi/Capture"),
+            findStudent: postData("/api/StudentApi/SearchStudents"),
+          
         };
 
         function postData(endpoint) {

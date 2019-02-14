@@ -1338,6 +1338,7 @@
     <Content Include="Scripts\angular-ui-router.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\room.allocation.controller.js" />
     <Content Include="Scripts\app\app.module.js" />
     <Content Include="Scripts\app\admission.controller.js" />
     <Content Include="Scripts\app\NotificationService.js" />

@@ -20,7 +20,8 @@
         function getAdmissions() {
             var payload = vm.model;
             services.searchAdmissions(payload, function (response) {
-                if (response.status === "00") {
+                console.log('Addmssion respnse >>', response);
+                if (response.Status === "00") {
                     vm.searchResult = response.data;
                 }
             });
@@ -30,7 +31,8 @@
         vm.findStudent = function () {
             var payload = vm.model;
             services.findStudent(payload, function (response) {
-                if (response.status === "00") {
+                console.log('Addmssion respnse >>', response);
+                if (response.Status === "00") {
                     vm.searchResult = response.data;
                     
                 }
@@ -46,6 +48,19 @@
                 function (response) {
                     console.log(response);
                 });
+        }
+
+
+        vm.setAdmissionStatus = function (admission, status) {
+            console.log('The admission >>', admission);
+            var payload = {};
+            payload.Status = status;
+            payload.Id = admission.AdmissionId;
+            services.setAdmissionStatus(payload, function(response) {
+                if (response.Status === "00") {
+                    utils.alertSuccess(response.Message);
+                }
+            });
         }
 
         vm.advancedSearch = function () {
