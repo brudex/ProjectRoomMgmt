@@ -14,7 +14,8 @@ namespace ProjectRoomMgmt
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-           // DbInitializer.InitializeTestRooms();
+           DbInitializer.InitDb();
+           DbInitializer.InitializeTestRooms();
             DbInitializer.InitializeTestStudents();
         }
     }

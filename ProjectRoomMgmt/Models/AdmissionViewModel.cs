@@ -32,8 +32,15 @@ namespace ProjectRoomMgmt.Models
         public string HomeAddress { get; set; }
         public string PostalAddress { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public  string IDType { get; set; }
+        public string Identification { get; set; }
+        public string TIN { get; set; }
+        public string SSN { get; set; }
 
-         
+        public DateTime CreatedAt { get; set; }
+
+
+
 
         public int SaveAdmission()
         {

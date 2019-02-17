@@ -28,12 +28,12 @@ namespace ProjectRoomMgmt.Controllers.Api
         {
             try
             {
-//                if (!ModelState.IsValid)
-//                {
+               // if (!ModelState.IsValid)
+               // {
                     var result = model.SaveAdmission();
                     _response = new ServiceResponse(result);
 
-//                }
+                //}
             }
             catch (Exception e)
             {
