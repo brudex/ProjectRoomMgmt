@@ -31,7 +31,7 @@
                             <i class="pg-close fs-14"></i>
                         </button>
                         <h2 data-ng-bind="vm.viewTitle"></h2>
-                        <p data-ng-show="!vm.isEdit" class="p-b-10">Please complete the form to add a new applicant.</p>
+                        <p data-ng-hide="vm.isEdit||vm.isView" class="p-b-10">Please complete the form to add a new applicant.</p>
                         <h3 data-ng-show="vm.isEdit" data-ng-bind="vm.subTitle"></h3>
                     </div>
                     <div class="modal-body" style="margin-top: -60px">
@@ -456,7 +456,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group form-group-default input-group col-sm-10">
                                             <label>From Date</label>
-                                            <input type="email" class="form-control" placeholder="Pick a date" id="datepicker-component1">
+                                            <input type="text" class="form-control" placeholder="Pick a date" id="datepicker-component1">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </span>

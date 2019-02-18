@@ -27,6 +27,7 @@
                     break;
                 case "action_view_admission":
                     vm.isEdit = false;
+                    vm.isView = true;
                     vm.applicationModel = admissionData;
                     $("#newAdmissionModal").modal("show");
                     break;
