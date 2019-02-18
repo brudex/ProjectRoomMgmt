@@ -78,8 +78,12 @@
         }
 
         vm.allocateRoom = function () {
-            var payload = vm.model;
+            vm.loader = true;
+            var payload = vm.allocationModel;
+            payload.roomNo = vm.selectedRoom.roomNo;
+
             services.bookRoom(payload, function (response) {
+                vm.loader = false;
                 if (response.Status === "00") {
                     utils.alertSuccess("Room successfully allocated");
                 }
