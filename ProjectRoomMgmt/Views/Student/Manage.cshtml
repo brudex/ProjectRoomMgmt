@@ -6,66 +6,112 @@
 }
 
 <h2>Manage Students</h2>
- 
-<div class="row" data-ng-controller="StudentMgmtController as vm" data-ng-init="vm.init()">
-    <div class="col-md-12">
-        <div class="form-group">
-            <label class="col-md-3">Manage Mode</label>
-            <div class="col-md-3">
-                <input type="radio" value="bydate" data-ng-model="vm.model.searchMode"/> Manage by Date
-            </div>
-            <div class="col-md-3">
-                <label><input type="radio" value="byword" data-ng-model="vm.model.searchMode"/> By Name or Student No.</label>
-            </div> 
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="row" data-ng-show="vm.model.searchMode == 'bydate'">
-            <label class="col-md-3">Manage Date</label>
-            <div class="col-md-4">
-                <input type="text" class="form-control"  placeholder="From Date" data-ng-model="vm.model.fromDate"/>
-            </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control"  placeholder="To Date" data-ng-model="vm.model.fromDate"/>
+
+<section data-ng-controller="StudentMgmtController as vm" data-ng-init="vm.init()">
+    <div class="row" >
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="col-md-3">Manage Mode</label>
+                <div class="col-md-3">
+                    <input type="radio" value="bydate" data-ng-model="vm.model.searchMode" /> Manage by Date
+                </div>
+                <div class="col-md-3">
+                    <label><input type="radio" value="byword" data-ng-model="vm.model.searchMode" /> By Name or Student No.</label>
+                </div>
             </div>
         </div>
-        <div class="row" data-ng-show="vm.model.searchMode == 'byword'">
-            <label class="col-md-3">Manage by name or student no.</label>
-            <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="Enter name or student no." data-ng-model="vm.model.searchText"/>
+        <div class="col-md-12">
+            <div class="row" data-ng-show="vm.model.searchMode == 'bydate'">
+                <label class="col-md-3">Manage Date</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" placeholder="From Date" data-ng-model="vm.model.fromDate" />
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" placeholder="To Date" data-ng-model="vm.model.fromDate" />
+                </div>
             </div>
+            <div class="row" data-ng-show="vm.model.searchMode == 'byword'">
+                <label class="col-md-3">Manage by name or student no.</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" placeholder="Enter name or student no." data-ng-model="vm.model.searchText" />
+                </div>
+            </div>
+            <button class="col-sm-offset-4 btn btn-success" data-ng-click="vm.findStudents()">Find Student</button>
         </div>
-        <button class="col-sm-offset-4 btn btn-success" data-ng-click="vm.findStudents()">Find Student</button>
+
+        <div class="col-md-12">
+            <table id="studentTable"></table>
+        </div>
     </div>
-  
-    <div class="col-md-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>Full Name</td>
-                    <td>Student No</td>
-                    <td>Course Name</td>
-                    <td>CountryOfOrigin</td>
-                    <td>Occupation</td>
-                    <td>PrimaryContactMobile</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr data-ng-repeat="item in vm.searchResult">
-                    <td data-ng-bind="item.FullName">Full Name</td>
-                    <td data-ng-bind="item.StudentNo">Student No</td>
-                    <td data-ng-bind="item.CourseName">Course Name</td>
-                    <td data-ng-bind="item.CountryOfOrigin">CountryOfOrigin</td>
-                    <td data-ng-bind="item.Occupation">Occupation</td>
-                    <td data-ng-bind="item.PrimaryContactMobile">PrimaryContactMobile</td>
-                    <td>
-                        <a href="@Url.Action("RoomAllocation", "Room")?studentNo={{item.StudentNo}}" class="btn btn-xs btn-primary">Allocate Room</a>
-                        <button class="btn btn-xs btn-primary">Deactivate Student</button>
-                        <button class="btn btn-xs btn-primary">Assign Transport</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    
+    
+    <div class="modal fade slide-up disable-scroll" id="roomAllocationModal" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog ">
+            <div class="modal-content-wrapper">
+                <div class="modal-content">
+                    <div class="modal-header clearfix text-left">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="pg-close fs-14"></i>
+                        </button>
+                        <h5 class="bold">Allocate Room</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="portlet-progress" style="background-color: rgba(255, 255, 255, 0.8);" data-ng-show="vm.loader"><div class="progress-circle-indeterminate progress-circle-master"></div></div>
+                        <form role="form" novalidate="" name="roomAllocationForm">
+                            <fieldset>
+                                <div class="form-group-attached m-b-10">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default input-group">
+                                                <label>Student ID</label>
+                                                <input type="text" data-ng-disabled="true" class="form-control" required="" data-ng-model="vm.allocationModel.studentNo">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default">
+                                                <label>Student Name</label>
+                                                <input type="text" data-ng-disabled="true" class="form-control" required="" data-ng-model="vm.allocationModel.studentName">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default">
+                                                <label>Course of Study</label>
+                                                <input type="text" data-ng-disabled="true" class="form-control" required="" data-ng-model="vm.allocationModel.courseName">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default form-group-default-select2 required">
+                                                <label class="">Available Rooms</label>
+                                                <select class="full-width form-control" data-init-plugin="select2" data-placeholder="Select Room"  required="" name="roomId" data-ng-options="item.Id as item.RoomName for item in vm.rooms" data-ng-model="vm.allocationModel.roomId"></select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default input-group col-sm-10">
+                                                <label>Evacuation Date</label>
+                                                <input type="text" class="form-control" placeholder="Pick a date" data-ng-model="vm.allocationModel.evacuationDate" required id="datepicker-component2">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="row">
+
+                                <div class="col-sm-4 m-t-10 sm-m-t-10">
+                                    <button type="button" data-ng-click="vm.allocateRoom()"  title="Please complete the form to allocate a room " class="btn btn-danger btn-block m-t-5">Save Allocation</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
     </div>
-</div>
+
+</section>

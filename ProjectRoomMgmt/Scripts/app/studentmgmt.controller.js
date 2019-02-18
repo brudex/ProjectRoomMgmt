@@ -3,37 +3,74 @@
     angular
         .module('kaiptcapp')
         .controller('StudentMgmtController', StudentMgmtController);
-    StudentMgmtController.$inject = ['brudexservices', '$location', '$window', 'brudexutils'];
-    function StudentMgmtController(services, location, $window, utils) {
+    StudentMgmtController.$inject = ['$scope','brudexservices', '$location', '$window', 'brudexutils'];
+
+    function StudentMgmtController($scope,services, location, $window, utils) {
         var vm = this;
         vm.errorMsg = [];
         vm.successMsg = [];
         vm.searchResult = [];
-        vm.model = { };
+        vm.model = {};
 
         vm.init = function () {
             listRecentStudents();
+            getAvailableRooms();
         };
 
 
+        vm.openAction = function (action, studentData) {
 
-        function listRecentStudents() {
-            var payload = { searchMode: "list" ,limit:100};
-            services.findStudent(payload, function (response) {
-                 
-                    if (response.Status === "00") {
-                        vm.searchResult = response.data;
-                    }
-                }); 
+            switch (action) {
+                case "action_allocate_room":
+                    vm.allocationModel = {};
+                    vm.allocationModel.courseName = studentData.CourseName;
+                    vm.allocationModel.studentName = studentData.FullName;
+                    vm.allocationModel.studentNo = studentData.StudentNo;
+
+                    $("#roomAllocationModal").modal("show");
+                    break;
+                case "action_view_admission":
+                    vm.isEdit = false;
+                    vm.isView = true;
+                    vm.applicationModel = admissionData;
+                    $("#newAdmissionModal").modal("show");
+                    break;
+                case "action_update_status":
+                    vm.applicationModel = admissionData;
+                    $("#statusUpdateModal").modal("show");
+                    vm.applicationModel.CreatedAt =
+                        moment(vm.applicationModel.CreatedAt).format('ddd, MMM D YYYY, h:mm:ss a')
+                    break;
+
+                default:
+                    NotificationService.warning("No action related");
+                    break;
+            }
+
+            $scope.$apply();
         }
 
         vm.findStudent = function () {
             var payload = vm.model;
-            services.findStudent(payload, function (response) {
-                if (response.Status === "00") {
-                    vm.searchResult = response.data;
-                }
-            });
+            services.findStudent(payload,
+                function (response) {
+                    if (response.Status === "00") {
+                        vm.searchResult = response.data;
+                    }
+                });
+        }
+
+        vm.allocateRoom = function () {
+            vm.loader = true;
+            var payload = vm.allocationModel;
+
+            services.bookRoom(payload,
+                function (response) {
+                    vm.loader = false;
+                    if (response.Status === "00") {
+                        utils.alertSuccess("Room successfully allocated");
+                    }
+                });
         }
 
         vm.newAdmission = function () {
@@ -44,38 +81,103 @@
             $("#AdvancedSearchModal").modal("show");
         }
 
-        var initApplicationsTable = function () {
+        function getAvailableRooms() {
+            services.getAvailableRooms(function (response) {
 
-            var table = $('#applicationsTable');
+                if (response.Status === "00") {
+                    var rooms = response.data;
+                    vm.rooms = [];
+                    angular.forEach(rooms,
+                        function (room) {
+                            room.blockCode = room.BlockLocation.replace(/ +/g, "");
+                            room.roomTypeCode = room.RoomType.replace(/ +/g, "");
+                            vm.rooms.push(room);
+                        });
 
-            var settings = {
-                "sDom": "t",
-                "destroy": true,
-                "paging": false,
-                "scrollCollapse": true,
-                "aoColumnDefs": [
-                    {
-                        'bSortable': false,
-                        'aTargets': [0]
-                    }
-                ],
-                "order": [
-                    [1, "desc"]
-                ]
-
-            };
-
-            table.dataTable(settings);
-
-            $('#applicationsTable input[type=checkbox]').click(function () {
-                if ($(this).is(':checked')) {
-                    $(this).closest('tr').addClass('selected');
-                } else {
-                    $(this).closest('tr').removeClass('selected');
                 }
-
             });
         }
+
+        function listRecentStudents() {
+            var payload = { searchMode: "list", limit: 100 };
+            services.findStudent(payload, function (response) {
+
+                if (response.Status === "00") {
+                    vm.searchResult = response.data;
+
+                    var table = $('#studentTable');
+
+                    var options = {
+                        data: vm.searchResult,
+                        columns: [
+                            {
+                                title: "Actions", width: "25%", data: function (data) {
+                                    return '<div class="btn- group ">' +
+                                        //'<button type= "button" class="btn btn-danger" ><i class="fa fa-trash-o"></i></button>' +
+                                        '<button type="button" class="btn btn-xs  btn-primary action_allocate_room">Allocate Room</button>' +
+                                        '<button type="button" class="btn btn-xs btn-primary action_assign_transport">Assign Transport</button>' +
+                                        '<button type="button" class="btn btn-xs btn-primary action_deactivate_student">Deactivate Student</button>' +
+                                        '</div>';
+                                }
+                            },
+                            {
+                                title: "Full Name", width: "20%", data: "FullName"
+                            },
+                            {
+                                title: "Student No", width: "15%", data: "StudentNo"
+                            },
+                            {
+                                title: "Country Of Origin", width: "10%", data: "CountryOfOrigin"
+
+                            },
+                            { title: "Course Name", width: "10%", data: "CourseName" },
+                            {
+                                title: "Occupation", width: "10%", data: "Occupation"
+                            },
+                            {
+                                title: "PrimaryContactMobile", width: "10%", data: "PrimaryContactMobile"
+                            }
+                        ],
+                        dom: "<'exportOptions'T>t<'row'<p i>>",
+                        order: [[5, "desc"]],
+                        destroy: true,
+                        "bScrollInfinite": true,
+                        "bScrollCollapse": true,
+                        oLanguage: {
+                            "sLengthMenu": "_MENU_ ",
+                            "sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+                        },
+                        iDisplayLength: 50
+                    };
+
+                    table.DataTable(options);
+
+                    table = $('#studentTable').DataTable();
+
+                    $('#studentTable tbody').on('click', 'tr .action_allocate_room', function () {
+
+                        vm.selectedStudent = table.row($($($(this).parent()).parent()).parent()).data();
+                        vm.openAction("action_allocate_room", vm.selectedStudent);
+                    });
+
+                    $('#studentTable tbody').on('click', 'tr .action_assign_transport', function () {
+
+                        vm.selectedStudent = table.row($($($(this).parent()).parent()).parent()).data();
+                        vm.openAction("action_assign_transport", vm.selectedStudent);
+                    });
+
+                    $('#studentTable tbody').on('click', 'tr .action_deactivate_student', function () {
+
+                        vm.selectedStudent = table.row($($($(this).parent()).parent()).parent()).data();
+                        vm.openAction("action_deactivate_student", vm.selectedStudent);
+                    });
+
+
+                }
+            });
+
+        }
+
 
     }
 })(jQuery);
