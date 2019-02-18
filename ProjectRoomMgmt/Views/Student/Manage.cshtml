@@ -80,9 +80,12 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
+                                            
                                             <div class="form-group form-group-default form-group-default-select2 required">
                                                 <label class="">Available Rooms</label>
-                                                <select class="full-width form-control" data-init-plugin="select2" data-placeholder="Select Room"  required="" name="roomId" data-ng-options="item.Id as item.RoomName for item in vm.rooms" data-ng-model="vm.allocationModel.roomId"></select>
+                                                <select class="full-width" data-placeholder="Select room" data-ng-model="vm.allocationModel.roomId" data-init-plugin="select2">
+                                                    <option data-ng-repeat="room in vm.rooms" value="{{room.Id}}">{{room.RoomName}}</option>
+                                                </select>
                                             </div>
                                         </div>
 
