@@ -5,25 +5,22 @@
     Layout = "~/Views/Shared/_Layout_Main.cshtml";
 }
 
-<section>
-    <div class="gallery" style="margin-top: 0">
+<section class="row" data-ng-controller="RoomAllocationController as vm" data-ng-init="vm.init()">
+
+
+    <div class="gallery m-t-0" id="gridcontainer" style="overflow: auto!important">
         <div class="gallery-filters p-t-20 p-b-10">
-            <ul class="list-inline text-right">
-                <li class="hint-text">Sort by: </li>
-                <li><a href="#" class="active text-master p-r-5 p-l-5">Name</a></li>
-                <li><a href="#" class="text-master hint-text p-r-5 p-l-5">Views</a></li>
-                <li><a href="#" class="text-master hint-text p-r-5 p-l-5">Cost</a></li>
-                <li>
-                    <button class="btn btn-primary m-l-10" data-toggle="filters">More filters</button>
+            <ul class="list-inline text-left" id="filters">
+                <li class="hint-text">Filter by: </li>
+                <li><a href="#" class="active text-master p-r-5 p-l-5">All</a></li>
+                <li data-ng-repeat="room in vm.rooms">
+                    <input type="checkbox" name="{{room.blockCode}}" value=".{{room.blockCode}}" id="{{room.blockCode}}"><label for="{{room.blockCode}}">{{room.BlockLocation}}</label>
+
                 </li>
+
             </ul>
         </div>
-        <!-- START GALLERY ITEM -->
-        <!--
-              FOR DEMO PURPOSES, FIRST GALLERY ITEM (.first) IS HIDDEN
-              FOR SCREENS <920px. PLEASE REMOVE THE CLASS 'first' WHEN YOU IMPLEMENT
-          -->
-        <div class="gallery-item first" data-width="1" data-height="1">
+        <div data-ng-repeat="room in vm.rooms" class="gallery-item {{room.blockCode}}" data-width="1" data-height="1">
             <!-- START PREVIEW -->
             <img src="assets/img/gallery/1.jpg" alt="" class="image-responsive-height">
             <!-- END PREVIEW -->
@@ -31,9 +28,9 @@
             <div class="overlayer bottom-left full-width">
                 <div class="overlayer-wrapper item-info ">
                     <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
-                        <div class="">
-                            <p class="pull-left bold text-white fs-14 p-t-10">Room 1</p>
-                            <h5 class="pull-right semi-bold text-white font-montserrat bold">$25.00</h5>
+                        <div class="m-b-55">
+                            <h5 class="bold text-white text-uppercase fs-14 p-t-10">{{room.RoomName}}({{room.RoomNo}})</h5>
+                            <h6 class="semi-bold text-white font-montserrat bold">Occupied By : Penrose Akoto</h6>
                             <div class="clearfix"></div>
                         </div>
                         <div class="m-t-10">
@@ -41,97 +38,82 @@
                                 <img width="40" height="40" src="assets/img/profiles/avatar.jpg" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar2x.jpg" alt="">
                             </div>
                             <div class="pull-right m-t-10">
-                                <button class="btn btn-white btn-xs btn-mini bold fs-14" type="button">+</button>
+                                <button class="btn btn-white btn-xs btn-mini bold fs-14" type="button" data-ng-click="vm.openAllocationModal(room)">+</button>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- END PRODUCT OVERLAY DESCRIPTION -->
         </div>
-        <!-- END GALLERY ITEM -->
-        <!-- START GALLERY ITEM -->
 
-        <div class="gallery-item " data-width="1" data-height="1">
-            <!-- START PREVIEW -->
-            <img src="assets/img/gallery/1.jpg" alt="" class="image-responsive-height">
-            <!-- END PREVIEW -->
-            <!-- START ITEM OVERLAY DESCRIPTION -->
-            <div class="overlayer bottom-left full-width">
-                <div class="overlayer-wrapper item-info ">
-                    <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
-                        <div class="">
-                            <p class="pull-left bold text-white fs-14 p-t-10">Room 2</p>
-                            <h5 class="pull-right semi-bold text-white font-montserrat bold">$25.00</h5>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="m-t-10">
-                            <div class="thumbnail-wrapper d32 circular m-t-5">
-                                <img width="40" height="40" src="assets/img/profiles/avatar.jpg" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar2x.jpg" alt="">
+    </div>
+
+
+    <div class="modal fade slide-up disable-scroll" id="roomAllocationModal" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog ">
+            <div class="modal-content-wrapper">
+                <div class="modal-content">
+                    <div class="modal-header clearfix text-left">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="pg-close fs-14"></i>
+                        </button>
+                        <h5>Allocate Room :   <span class="semi-bold">{{vm.selectedRoom.RoomName}}({{vm.selectedRoom.RoomNo}})</span></h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="portlet-progress" style="background-color: rgba(255, 255, 255, 0.8);" data-ng-show="vm.loader"><div class="progress-circle-indeterminate progress-circle-master"></div></div>
+                        <form role="form" novalidate="" name="roomAllocationForm">
+                            <fieldset>
+                                <div class="form-group-attached m-b-10">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default input-group">
+                                                <label>Student ID</label>
+                                                <input type="text" class="form-control" required="" data-ng-model="vm.allocationModel.studentNo">
+                                                <span class="input-group-addon">
+                                                    <button class="btn btn-success">Verify Id</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default">
+                                                <label>Student Name</label>
+                                                <input type="text" data-ng-disabled="true" class="form-control" required="" data-ng-model="vm.allocationModel.FullName">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default">
+                                                <label>Course of Study</label>
+                                                <input type="text" data-ng-disabled="true" class="form-control" required="" data-ng-model="vm.allocationModel.CourseName">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default input-group col-sm-10">
+                                                <label>Evacuation Date</label>
+                                                <input type="text" class="form-control" placeholder="Pick a date"  required id="datepicker-component2">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="row">
+
+                                <div class="col-sm-4 m-t-10 sm-m-t-10">
+                                    <button type="button" data-ng-click="vm.allocateRoom()" data-ng-disabled="!roomAllocationForm.isValid" title="Please complete the form to allocate a room " class="btn btn-danger btn-block m-t-5">Save Allocation</button>
+                                </div>
                             </div>
-                            <div class="pull-right m-t-10">
-                                <button class="btn btn-white btn-xs btn-mini bold fs-14" type="button">+</button>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="gallery-item" data-width="1" data-height="1">
-            <!-- START PREVIEW -->
-            <img src="assets/img/gallery/1.jpg" alt="" class="image-responsive-height">
-            <!-- END PREVIEW -->
-            <!-- START ITEM OVERLAY DESCRIPTION -->
-            <div class="overlayer bottom-left full-width">
-                <div class="overlayer-wrapper item-info ">
-                    <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
-                        <div class="">
-                            <p class="pull-left bold text-white fs-14 p-t-10">Room 3</p>
-                            <h5 class="pull-right semi-bold text-white font-montserrat bold">$25.00</h5>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="m-t-10">
-                            <div class="thumbnail-wrapper d32 circular m-t-5">
-                                <img width="40" height="40" src="assets/img/profiles/avatar.jpg" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar2x.jpg" alt="">
-                            </div>
-                            <div class="pull-right m-t-10">
-                                <button class="btn btn-white btn-xs btn-mini bold fs-14" type="button">+</button>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END PRODUCT OVERLAY DESCRIPTION -->
-        </div>
-        <div class="gallery-item" data-width="1" data-height="1">
-            <!-- START PREVIEW -->
-            <img src="assets/img/gallery/1.jpg" alt="" class="image-responsive-height">
-            <!-- END PREVIEW -->
-            <!-- START ITEM OVERLAY DESCRIPTION -->
-            <div class="overlayer bottom-left full-width">
-                <div class="overlayer-wrapper item-info ">
-                    <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
-                        <div class="">
-                            <p class="pull-left bold text-white fs-14 p-t-10">Room 4</p>
-                            <h5 class="pull-right semi-bold text-white font-montserrat bold">$25.00</h5>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="m-t-10">
-                            <div class="thumbnail-wrapper d32 circular m-t-5">
-                                <img width="40" height="40" src="assets/img/profiles/avatar.jpg" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar2x.jpg" alt="">
-                            </div>
-                            <div class="pull-right m-t-10">
-                                <button class="btn btn-white btn-xs btn-mini bold fs-14" type="button">+</button>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END PRODUCT OVERLAY DESCRIPTION -->
+            <!-- /.modal-content -->
         </div>
     </div>
+
 </section>

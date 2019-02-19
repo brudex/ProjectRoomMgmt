@@ -23,12 +23,17 @@ namespace ProjectRoomMgmt.Models.DbModels
             CreatedAt= DateTime.Now;
             DateOfBirth = vm.DateOfBirth;
             Gender = vm.Gender;
+            Mobile = vm.Mobile;
             EmailAddress = vm.EmailAddress;
             HomeAddress = vm.HomeAddress;
             PostalAddress = vm.PostalAddress;
             PrimaryContactMobile = vm.PrimaryContactMobile;
             PrimaryContactName = vm.PrimaryContactName;
-            
+            Identification = vm.Identification;
+            IDType = vm.IDType;
+            SSN = vm.SSN;
+            TIN = vm.TIN;
+            Id = vm.AdmissionId;
 
         }
 
@@ -42,7 +47,6 @@ namespace ProjectRoomMgmt.Models.DbModels
         public string CityOfOrigin { get; set; }
         public string Occupation { get; set; }
         public string OriginatingInstitute { get; set; } //e.g., Police, Immigration etc.
-        public DateTime CreatedAt { get; set; }
         public string Gender { get; set; }
         public string Mobile { get; set; }
         public string PrimaryContactMobile { get; set; }
@@ -51,6 +55,11 @@ namespace ProjectRoomMgmt.Models.DbModels
         public string HomeAddress { get; set; }
         public string PostalAddress { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string IDType { get; set; }
+        public string Identification { get; set; }
+        public string TIN { get; set; }
+        public string SSN { get; set; }
 
         public void Save()
         {

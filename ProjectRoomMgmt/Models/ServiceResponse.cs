@@ -18,7 +18,7 @@ namespace ProjectRoomMgmt.Models
         public ServiceResponse(object Data)
         {
             data = Data;
-            Status = (Data == null).ToString();
+            Status = (Data != null).ToString();
             //Message = "Ok" = Data != null;
         }
 

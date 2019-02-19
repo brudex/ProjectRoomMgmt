@@ -60,7 +60,7 @@
                     <td data-ng-bind="item.Occupation">Occupation</td>
                     <td data-ng-bind="item.PrimaryContactMobile">PrimaryContactMobile</td>
                     <td>
-                        <button class="btn btn-xs btn-primary">Allocate Room</button>
+                        <a href="@Url.Action("RoomAllocation", "Room")?studentNo={{item.StudentNo}}" class="btn btn-xs btn-primary">Allocate Room</a>
                         <button class="btn btn-xs btn-primary">Deactivate Student</button>
                         <button class="btn btn-xs btn-primary">Assign Transport</button>
                     </td>

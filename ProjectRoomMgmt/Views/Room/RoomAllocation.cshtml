@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model ProjectRoomMgmt.Models.RoomViewModel
  
 
 @{
@@ -8,17 +8,16 @@
 
 <h2>@ViewBag.Title</h2>
 
-
-
 <div class="row" data-ng-controller="RoomAllocationController as vm" data-ng-init="vm.init()">
-    </div>
+
+    <input type="hidden" id="__studentNo__" value="@Model.StudentNo" />
+    <input type="hidden" id="__roomNo__" value="@Model.RoomNo" />
 
     <div class="row">
         <div class="col-md-6">
             <form role="form">
-
                 @if (ViewBag.Error != null)
-            {
+                {
                     <div class="alert alert-error">
                         @ViewBag.Error
                     </div>
@@ -29,13 +28,16 @@
                         @ViewBag.Success
                     </div>
                 }
-
                 <div class="form-group-attached m-b-10">
                     <div class="row">
                         <div class="col-sm-9">
-                            <div class="form-group form-group-default">
-                                <label>Student No</label>
-                                <input type="text" class="form-control" required="" name="studentNo" data-ng-model="vm.model.studentNo">
+
+                            <div class="form-group form-group-default input-group">
+                                <label>Student ID</label>
+                                <input type="text" class="form-control" required="" data-ng-model="vm.model.studentNo">
+                                <span class="input-group-addon">
+                                    <button class="btn btn-success">Verify Id</button>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -45,7 +47,7 @@
                         <div class="col-sm-9">
                             <div class="form-group form-group-default">
                                 <label>Student Name</label>
-                                <div type="text" class="form-control" required="" name="studentName" data-ng-model="vm.model.studentName">
+                                <div type="text" class="form-control" required="" name="studentName" data-ng-bind="vm.model.studentName">
                                 </div>
                             </div>
                         </div>
@@ -56,15 +58,26 @@
                         <div class="col-sm-9">
                             <div class="form-group form-group-default">
                                 <label>Select Room</label>
-                                <select type="text" class="form-control" required="" name="roomNo" data-ng-model="vm.model.roomNo"></select>
+                                <select class="form-control" required="" name="roomId" data-ng-options="item.Id as item.RoomName for item in vm.rooms" data-ng-model="vm.model.roomId"></select>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <input type="submit" class="btn btn-md btn-primary" value="Assign Room" />
-
+                <div class="form-group-attached m-b-10">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="form-group form-group-default">
+                                <label>Evacuation Date</label>
+                                <input type="text" class="form-control" required="" name="roomId" data-ng-model="vm.model.evacuationDate" placeholder="Pick a date"  id="datepicker-component2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="button" data-ng-click="vm.allocateRoom()"  value="Assign Room" class="btn btn-danger m-t-5"/>
             </form>
+
+             
         </div>
     </div>
 
+</div>

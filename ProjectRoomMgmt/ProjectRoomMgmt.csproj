@@ -225,6 +225,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdmissionController.cs" />
     <Compile Include="Controllers\Api\AdmissionApiController.cs" />
+    <Compile Include="Controllers\Api\DashboardApiController.cs" />
     <Compile Include="Controllers\Api\DefaultController.cs" />
     <Compile Include="Controllers\Api\RoomApiController.cs" />
     <Compile Include="Controllers\Api\StudentApiController.cs" />
@@ -238,6 +239,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdmissionStatusViewModel.cs" />
+    <Compile Include="Models\DashboardModels.cs" />
     <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Models\AdmissionViewModel.cs" />
     <Compile Include="Models\Dbhandler.cs" />
@@ -1554,6 +1556,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.countdown.min.js" />
+    <Content Include="Scripts\jquery.isotope.min.js" />
     <Content Include="Scripts\jquery.qrcode.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -1565,6 +1568,7 @@
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\site.min.js" />
     <Content Include="Scripts\social-widgets-config.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\theme.functions.js" />
     <Content Include="Scripts\TimeCircles.js" />
     <Content Include="Scripts\_references.js" />
