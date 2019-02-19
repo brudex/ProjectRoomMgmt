@@ -11,9 +11,9 @@
             saveAdmission: postData("/api/AdmissionApi/Capture"),
             findStudent: postData("/api/StudentApi/SearchStudents"),
             getStudentInfoByNo: postData("/api/StudentApi/StudentInfo"),
+            bookRoom: postData("/api/RoomApi/RoomBooking"),
             getAvailableRooms: getData("/api/RoomApi/GetAvailableRooms"),
-            bookRoom: postData("/api/RoomApi/RoomBooking")
-          
+
         };
 
         function postData(endpoint) {
