@@ -17,6 +17,14 @@ namespace ProjectRoomMgmt
             public static string Accepted = "Accepted";
         }
 
+        public class RoomStatus
+        {
+            //Occupied, Free/Empty, Partially occupied
+            public static string Booked = "Booked";
+            public static string Available = "Available";
+            //public static string Accepted = "Accepted";
+        }
+
         public static int GetUniqueStudentNo()
         {
             return Interlocked.Increment(ref StudentIdStartIndex);

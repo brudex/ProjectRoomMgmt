@@ -212,6 +212,15 @@ namespace ProjectRoomMgmt.Models
             }
         }
 
+        public List<Room> GetAvailableRooms()
+        {
+            using (var conn = GetOpenDefaultDbConnection())
+            {
+                string sql = string.Format("select * from Room where status='{0}'",Constants.RoomStatus.Available);
+                return conn.Query<Room>(sql).ToList();
+            }
+        }
+
         public List<RoomBooking> GetRoomBookingsByRoomId(int id)
         {
             using (var conn = GetOpenDefaultDbConnection())

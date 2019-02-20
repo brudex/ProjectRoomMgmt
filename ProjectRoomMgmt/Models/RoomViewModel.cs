@@ -13,8 +13,28 @@ namespace ProjectRoomMgmt.Models
         public  string RoomNo { get; set; }
         public  int RoomId{ get; set; }
         public  DateTime EvacuationDate{ get; set; }
+        public string RoomType { get; set; }
+        public string RoomName { get; set; }
+        public string BlockLocation { get; set; }
+        public string ImageUrl { get; set; }
+        public int Capacity { get; set; }
+        public string Status { get; set; } //Occupied, Free/Empty, Partially occupied
+
+        public List<RoomBooking> Bookings { get; set; } 
         public RoomViewModel() { }
-        
+
+
+        public RoomViewModel(Room room)
+        { 
+             RoomNo = room.RoomNo;
+             RoomId = room.Id;
+             RoomType = room.RoomType;
+             RoomName = room.RoomName;
+             BlockLocation= room.BlockLocation;
+             ImageUrl =room.ImageUrl;
+             Capacity  = room.Capacity;
+             Status = room.Status;
+        }
 
         public ServiceResponse DoRoomBooking(JObject data)
         {
@@ -36,11 +56,14 @@ namespace ProjectRoomMgmt.Models
                     booking.BookingDate=DateTime.Now;
                     // booking.BookingStatus = "Active";
                     booking.StudentNo = StudentNo;
+                    booking.OccupantName = student.FullName;
                     booking.TrainingStudentId = student.StudentId;
                     booking.ExpectedVacationDate = EvacuationDate;
                     DbHandler.Instance.Save(booking);
                     response.Status = "00";
                     response.Message = "Booking successful";
+                    room.Status = Constants.RoomStatus.Booked;
+                    DbHandler.Instance.Save(room);
                 } 
 
             }

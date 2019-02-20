@@ -22,6 +22,10 @@
             getAvailableRooms();
         };
 
+        vm.verifyStudentId =function() {
+            verifyStudentInfoByNo(vm.model.studentNo);
+        }
+
         function verifyStudentInfoByNo(studentNo) {
             var payload = {};
             payload.studentNo = studentNo;

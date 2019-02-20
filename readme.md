@@ -10,3 +10,33 @@
   4. Room Allocation. Students will be allocated rooms on this page
   5. Manage Bookings. View Room allocations. Each roow will have actions to free booking
   6. Manage Rooms. This will show all rooms and their status(Occupied, Free/Empty, Partially occupied,) One should also be able to free rooms on this page
+  
+ ###Isssues so Far
+  ##Admissions Page
+  1. The buttons on the Manage Admissions Page are not intuitive. Please change them to Action dropdowns and Label them (Edit, View, Accept, Reject)
+  2. Move the Print button toe th far right. Put export buttons for excel and csv
+  
+  ##Manage Students
+  Move the print button to the far right. 
+  The Search form must be properly arranged
+  The buttons must be dropdown action buttons. They are too cluttered
+  
+  ##Manage Rooms
+  Remove course of study from Room allocation form
+  Evacuation Date does not appear bind the date when selected so the data does not reach the server
+  Room setup page must have a field to upload picture so it will appear on managerooms page. Otherwise put a default picture there
+  
+  ##Header 
+  Remove unneccessary icons from the header
+  The Logged user's name should appear where David Nest name is
+  Logo should be replaced with KAIPTC logo
+    
+  ##Dashboard Page
+  The dashboard page must have the following data for now. Check the DashboardApiController for the endpoints
+   1 Admissions(Grouped by :Accepted, Pending, Rejected)
+   2 No of Students
+   3 No of Available Rooms
+   4 No of Allocated Rooms
+  
+  
+  

@@ -17,8 +17,8 @@
         //Multiselect - Select2 plug-in
         $("#multi").val(["Jim", "Lucy"]).select2();
 
-        //Date Pickers
-        $('#datepicker-range, #datepicker-component1, #datepicker-component2').datepicker();
+        //Date Pickersformat: 'MM/DD/YYYY h:mm A'
+        $('#datepicker-range, #datepicker-component1, #datepicker-component2').datepicker({format: 'yyyy-mm-dd'});
 
         $('#datepicker-embeded').datepicker({
             daysOfWeekDisabled: "0,1"

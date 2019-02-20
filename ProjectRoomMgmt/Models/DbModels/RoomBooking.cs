@@ -11,6 +11,7 @@ namespace ProjectRoomMgmt.Models.DbModels
         public int RoomId { get; set; }
         public int TrainingStudentId { get; set; }
         public string StudentNo { get; set; }
+        public string OccupantName { get; set; }
         public DateTime BookingDate { get; set; }
         public DateTime? ExpectedVacationDate { get; set; }
         public DateTime? VacatedAt { get; set; }
