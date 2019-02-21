@@ -5,46 +5,57 @@
     Layout = "~/Views/Shared/_Layout_Main.cshtml";
 }
 
-<h2>Manage Students</h2>
-
 <section data-ng-controller="StudentMgmtController as vm" data-ng-init="vm.init()">
-    <div class="row" >
+    <div class="row">
         <div class="col-md-12">
-            <div class="form-group">
-                <label class="col-md-3">Manage Mode</label>
-                <div class="col-md-3">
-                    <input type="radio" value="bydate" data-ng-model="vm.model.searchMode" /> Manage by Date
-                </div>
-                <div class="col-md-3">
-                    <label><input type="radio" value="byword" data-ng-model="vm.model.searchMode" /> By Name or Student No.</label>
+            <div class="form-group " style="margin-bottom: -5px">
+                <label class="">Find Student(s)</label>
+                <div class="radio radio-success m-l-10" style="display: inline-block;">
+                    <input type="radio" value="bydate" name="optionyes" id="bydate" data-ng-model="vm.model.searchMode">
+                    <label for="bydate">By Date</label>
+                    <input type="radio" checked="checked" value="byword" name="optionyes" id="byword" data-ng-model="vm.model.searchMode">
+                    <label for="byword">By Name or Student No</label>
                 </div>
             </div>
         </div>
         <div class="col-md-12">
-            <div class="row" data-ng-show="vm.model.searchMode == 'bydate'">
-                <label class="col-md-3">Manage Date</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" placeholder="From Date" data-ng-model="vm.model.fromDate" />
-                </div>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" placeholder="To Date" data-ng-model="vm.model.fromDate" />
+            <div class="col-md-5 p-l-0" data-ng-show="vm.model.searchMode == 'bydate'">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-group-default input-group col-sm-10">
+                            <label>From Date</label>
+                            <input type="text" class="form-control" placeholder="Pick a date" data-ng-model="vm.model.fromDate" required id="datepicker-component2">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-group-default input-group col-sm-10">
+                            <label>To Date</label>
+                            <input type="text" class="form-control" placeholder="Pick a date" data-ng-model="vm.model.toDate" required id="datepicker-component2">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row" data-ng-show="vm.model.searchMode == 'byword'">
-                <label class="col-md-3">Manage by name or student no.</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" placeholder="Enter name or student no." data-ng-model="vm.model.searchText" />
-                </div>
+            <div class="col-md-5 p-l-0" data-ng-show="vm.model.searchMode == 'byword'">
+                <input type="text" class="form-control" placeholder="Enter name or student no." data-ng-model="vm.model.searchText" />
+
             </div>
-            <button class="col-sm-offset-4 btn btn-success" data-ng-click="vm.findStudents()">Find Student</button>
+            <button class="btn btn-success" data-ng-click="vm.findStudent()">Find Student</button>
         </div>
 
         <div class="col-md-12">
-            <table id="studentTable"></table>
+
+            <table class="table table-hover table-striped" id="studentTable"></table>
+
         </div>
     </div>
-    
-    
+
+
     <div class="modal fade slide-up disable-scroll" id="roomAllocationModal" tabindex="-1" role="dialog" aria-hidden="false">
         <div class="modal-dialog ">
             <div class="modal-content-wrapper">
@@ -80,7 +91,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
-                                            
+
                                             <div class="form-group form-group-default form-group-default-select2 required">
                                                 <label class="">Available Rooms</label>
                                                 <select class="full-width" data-placeholder="Select room" data-ng-model="vm.allocationModel.roomId" data-init-plugin="select2">
@@ -106,7 +117,7 @@
                             <div class="row">
 
                                 <div class="col-sm-4 m-t-10 sm-m-t-10">
-                                    <button type="button" data-ng-click="vm.allocateRoom()"  title="Please complete the form to allocate a room " class="btn btn-danger btn-block m-t-5">Save Allocation</button>
+                                    <button type="button" data-ng-click="vm.allocateRoom()" title="Please complete the form to allocate a room " class="btn btn-danger btn-block m-t-5">Save Allocation</button>
                                 </div>
                             </div>
                         </form>

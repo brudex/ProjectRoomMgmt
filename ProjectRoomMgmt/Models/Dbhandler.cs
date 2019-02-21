@@ -54,7 +54,7 @@ namespace ProjectRoomMgmt.Models
             return connection;
         }
 
-         
+
 
         public int Save<T>(T data) where T : class
         {
@@ -64,7 +64,7 @@ namespace ProjectRoomMgmt.Models
             }
         }
 
-       public bool Update<T>(T data) where T : class
+        public bool Update<T>(T data) where T : class
         {
             using (var conn = GetOpenDefaultDbConnection())
             {
@@ -79,12 +79,12 @@ namespace ProjectRoomMgmt.Models
                 return conn.Get<T>(Id);
             }
         }
-        public List<AdmissionViewModel> GetAdmissions(int limit=100)
+        public List<AdmissionViewModel> GetAdmissions(int limit = 100)
         {
             using (var conn = GetOpenDefaultDbConnection())
             {
                 string sql =
-                    "select top "+limit+ " a.*,b.* ,a.Id 'AdmissionId' from AdmissionApplication a inner join ApplicantBioData b on a.BioDataId=b.Id order by a.Id desc";
+                    "select top " + limit + " a.*,b.* ,a.Id 'AdmissionId' from AdmissionApplication a inner join ApplicantBioData b on a.BioDataId=b.Id order by a.Id desc";
                 return conn.Query<AdmissionViewModel>(sql).ToList();
             }
         }
@@ -105,7 +105,7 @@ namespace ProjectRoomMgmt.Models
             {
                 string sql =
                     "select a.*,b.*,a.Id 'AdmissionId'  from AdmissionApplication a inner join ApplicantBioData b on a.BioDataId=b.Id where a.Created >= @fromDate and a.CreatedAt <= @toDate  order by a.Id desc";
-                return conn.Query<AdmissionViewModel>(sql,new {fromDate,toDate}).ToList();
+                return conn.Query<AdmissionViewModel>(sql, new { fromDate, toDate }).ToList();
             }
         }
 
@@ -115,7 +115,7 @@ namespace ProjectRoomMgmt.Models
             using (var conn = GetOpenDefaultDbConnection())
             {
                 string sql =
-                    "select a.*,b.* from TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id where a.Created >= @fromDate and a.CreatedAt <= @toDate  order by a.Id desc";
+                    "select a.*,b.* from TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id where a.CreatedAt >= @fromDate and a.CreatedAt <= @toDate  order by a.Id desc";
                 return conn.Query<StudentViewModel>(sql, new { fromDate, toDate }).ToList();
             }
         }
@@ -136,8 +136,8 @@ namespace ProjectRoomMgmt.Models
             using (var conn = GetOpenDefaultDbConnection())
             {
                 string sql =
-                    string.Format("select a.*,b.* from TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id where b.FullName like '%{0}%'  order by a.Id desc", text);
-                return conn.Query<StudentViewModel>(sql).ToList();
+                    string.Format("select a.*,b.* from TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id where b.FullName like '%@searchText%' or a.StudentNo=@searchText  order by a.Id desc", text);
+                return conn.Query<StudentViewModel>(sql, new { searchText = text }).ToList();
             }
         }
 
@@ -169,7 +169,7 @@ namespace ProjectRoomMgmt.Models
             using (var conn = GetOpenDefaultDbConnection())
             {
                 string sql =
-                    "select top "+limit+ " * from  TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id order by a.Id desc ";
+                    "select top " + limit + " * from  TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id order by a.Id desc ";
                 return conn.Query<StudentViewModel>(sql).ToList();
             }
         }
@@ -178,7 +178,7 @@ namespace ProjectRoomMgmt.Models
         {
             using (var conn = GetOpenDefaultDbConnection())
             {
-                string sql = "select max(StudentNo) 'int' from TrainingStudent" ;
+                string sql = "select max(StudentNo) 'int' from TrainingStudent";
                 return conn.Query<int>(sql).FirstOrDefault();
             }
         }
@@ -189,7 +189,7 @@ namespace ProjectRoomMgmt.Models
             {
                 string sql =
                     "select top " + 1 + " a.*,a.Id 'StudentId',b.* from  TrainingStudent a inner join ApplicantBioData b on a.BioDataId=b.Id where a.StudentNo=@studentNo order by a.Id desc";
-                return conn.Query<StudentViewModel>(sql,new {studentNo}).FirstOrDefault();
+                return conn.Query<StudentViewModel>(sql, new { studentNo }).FirstOrDefault();
             }
         }
 
@@ -216,7 +216,7 @@ namespace ProjectRoomMgmt.Models
         {
             using (var conn = GetOpenDefaultDbConnection())
             {
-                string sql = string.Format("select * from Room where status='{0}'",Constants.RoomStatus.Available);
+                string sql = string.Format("select * from Room where status='{0}'", Constants.RoomStatus.Available);
                 return conn.Query<Room>(sql).ToList();
             }
         }
@@ -226,7 +226,7 @@ namespace ProjectRoomMgmt.Models
             using (var conn = GetOpenDefaultDbConnection())
             {
                 string sql = "select * from RoomBooking where RoomId=@id and Active=1";
-                return conn.Query<RoomBooking>(sql,new {id}).ToList();
+                return conn.Query<RoomBooking>(sql, new { id }).ToList();
             }
         }
     }

@@ -108,12 +108,7 @@
                     </a>
                     <span class="icon-thumbnail">W</span>
                 </li>
-
-                <li class="">
-                    <a href="@Url.Action("RoomAllocation", "Room")"><span class="title">Room Allocation</span></a>
-                    <span class="icon-thumbnail"><i class="pg-social"></i></span>
-                </li>
-
+                
                 <li class="">
                     <a href="@Url.Action("ManageRooms","Room")"><span class="title">Manage Rooms</span></a>
                     <span class="icon-thumbnail"><i class="pg-social"></i></span>
@@ -336,7 +331,7 @@
                 <!-- START User Info-->
                 <div class="visible-lg visible-md m-t-10">
                     <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
-                        <span class="semi-bold">David</span> <span class="text-master">Nest</span>
+                        <span class="semi-bold">@User.Identity.Name</span> 
                     </div>
                     <div class="dropdown pull-right">
                         <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

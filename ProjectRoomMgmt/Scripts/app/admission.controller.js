@@ -61,12 +61,12 @@
                         data: vm.searchResult,
                         columns: [
                             {
-                                title: "Actions", width: "25%", data: function (data) {
+                                title: "Actions", width: "15%", data: function (data) {
                                     return '<div class="btn- group ">' +
                                         //'<button type= "button" class="btn btn-danger" ><i class="fa fa-trash-o"></i></button>' +
-                                        '<button type="button" class="btn  btn-warning action_edit_admission"><i class="fa fa-pencil"></i></button>' +
-                                        '<button type="button" class="btn btn-default action_view_admission"><i class="fa fa-eye"></i></button>' +
-                                        '<button type="button" class="btn btn-success action_update_status"><i class="fa fa-certificate"></i> Update Status</button>' +
+                                        '<button type="button" class="btn m-r-5 btn-warning btn-xs action_edit_admission">Edit</button>' +
+                                        '<button style="background:#a7b184" type="button" class="btn m-r-5 btn-default btn-xs action_view_admission">View</button>' +
+                                        '<button type="button" class="btn btn-danger btn-xs action_update_status"> Update Status</button>' +
                                         '</div>';
                                 }
                             },
@@ -87,7 +87,7 @@
                                 title: "Admission Status", width: "10%", data: "AdmissionStatus"
                             }
                         ],
-                        dom: "<'exportOptions'T>t<'row'<p i>>",
+                        dom: "",
                         order: [[5, "desc"]],
                         destroy: true,
                         "bScrollInfinite": true,
