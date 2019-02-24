@@ -1340,6 +1340,7 @@
     <Content Include="Scripts\angular-ui-router.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\apexcharts%40latest.js" />
     <Content Include="Scripts\app\room.allocation.controller.js" />
     <Content Include="Scripts\app\app.module.js" />
     <Content Include="Scripts\app\admission.controller.js" />

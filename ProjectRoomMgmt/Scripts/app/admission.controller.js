@@ -152,13 +152,14 @@
 
                     vm.loader = false;
 
-                    if (response.Status == "00") {
+                    if (response.Status == "True") {
                         NotificationService.success("New application added successfully");
                         $("#newAdmissionModal").modal("hide");
                         getAdmissions();
                     }
                     else {
                         NotificationService.alert("An error occured.Please try again.");
+                        getAdmissions();
                     }
 
                 });

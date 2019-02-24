@@ -26,6 +26,10 @@
             verifyStudentInfoByNo(vm.model.studentNo);
         }
 
+        vm.newRoom=function() {
+            $("#newRoomModal").modal('show');
+        }
+
         function verifyStudentInfoByNo(studentNo) {
             var payload = {};
             payload.studentNo = studentNo;
@@ -37,7 +41,7 @@
         }
 
         function getAvailableRooms() {
-            services.getAvailableRooms(function (response) {
+            services.getAllRooms(function (response) {
 
                 if (response.Status === "00") {
                     var rooms = response.data;

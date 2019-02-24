@@ -76,7 +76,7 @@
 
 
 .isotope {
-    overflow: auto !important;
+    overflow: visible !important;
     height: auto !important;
 }
 

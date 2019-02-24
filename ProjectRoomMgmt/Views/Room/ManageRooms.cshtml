@@ -6,9 +6,14 @@
 }
 
 <section class="row" data-ng-controller="RoomAllocationController as vm" data-ng-init="vm.init()">
+    <div class="col-md-12 p-l-0">
+        <div class="btn-group">
+            @*<button class="btn btn-primary m-r-10" data-ng-click="vm.advancedManage()">Advanced Manage</button>*@
+            <button class="btn btn-primary m-r-10" data-ng-click="vm.newRoom()"><i class="fa fa-plus"></i> New Room</button>
+        </div>
+    </div>
 
-
-    <div class="gallery m-t-0" id="gridcontainer" style="overflow: auto!important">
+    <div class="gallery m-t-0" id="gridcontainer" style="overflow: auto !important;clear: both">
         <div class="gallery-filters p-t-20 p-b-10">
             <ul class="list-inline text-left" id="filters">
                 <li class="hint-text">Filter by: </li>
@@ -28,9 +33,10 @@
             <div class="overlayer bottom-left full-width">
                 <div class="overlayer-wrapper item-info ">
                     <div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
-                        <div class="m-b-55">
+                        <div class="m-b-40">
                             <h5 class="bold text-white text-uppercase fs-14 p-t-10">{{room.RoomName}}({{room.RoomNo}})</h5>
-                            <h6 class="semi-bold text-white font-montserrat bold">Occupied By : Penrose Akoto</h6>
+                            <h6 data-ng-if="room.Bookings" class="semi-bold text-white font-montserrat bold">Occupied By : {{room.Bookings.OccupantName}}({{room.Bookings.StudentNo}})</h6>
+                            <h6 class="semi-bold text-white font-montserrat bold">Status : {{room.Status}}</h6>
                             <div class="clearfix"></div>
                         </div>
                         <div class="m-t-10">
@@ -48,7 +54,70 @@
         </div>
 
     </div>
+    
+    <div class="modal fade slide-up disable-scroll" id="newRoomModal" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog ">
+            <div class="modal-content-wrapper">
+                <div class="modal-content">
+                    <div class="modal-header clearfix text-left">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="pg-close fs-14"></i>
+                        </button>
+                        <h5 class="bold">Add new room</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="portlet-progress" style="background-color: rgba(255, 255, 255, 0.8);" data-ng-show="vm.loader"><div class="progress-circle-indeterminate progress-circle-master"></div></div>
+                        <form role="form" novalidate="" name="newRoomForm">
+                            <fieldset>
+                                <div class="form-group-attached m-b-10">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default input-group">
+                                                <label>Room Name</label>
+                                                <input type="text" class="form-control" required="" data-ng-model="vm.roomModel.RoomName">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default">
+                                                <label>Room Number</label>
+                                                <input type="text" data-ng-disabled="true" class="form-control" required="" data-ng-model="vm.roomModel.RoomNo">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default form-group-default-select2 required">
+                                                <label class="">Room Block</label>
+                                                <select class="full-width" data-placeholder="Select Block" data-ng-model="vm.roomModel.BlockLocation" data-init-plugin="select2">
+                                                    <option value="">Select Room Block</option>
+                                                    <option value="1">Block one</option>
+                                                    <option value="2">Block two</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default">
+                                                <label>Room Capacity</label>
+                                                <input type="text" data-ng-disabled="true" class="form-control" required="" data-ng-model="vm.roomModel.Capacity">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="row">
+
+                                <div class="col-sm-4 m-t-10 sm-m-t-10">
+                                    <button type="button" data-ng-click="vm.allocateRoom()" data-ng-disabled="!newRoomForm.isValid" title="Please complete the form to add a new room" class="btn btn-danger btn-block m-t-5">Save Room</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
 
     <div class="modal fade slide-up disable-scroll" id="roomAllocationModal" tabindex="-1" role="dialog" aria-hidden="false">
         <div class="modal-dialog ">

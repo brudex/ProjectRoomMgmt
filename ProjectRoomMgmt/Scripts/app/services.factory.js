@@ -13,6 +13,11 @@
             getStudentInfoByNo: postData("/api/StudentApi/StudentInfo"),
             bookRoom: postData("/api/RoomApi/RoomBooking"),
             getAvailableRooms: getData("/api/RoomApi/GetAvailableRooms"),
+            getAllRooms: getData("/api/RoomApi/GetAllRooms"),
+            getStudentsChartData: getData("/api/DashboardApi/GetAdmissionsCount"),
+            getStudentsCount: getData("/api/DashboardApi/GetStudentsCount"),
+            getAvailableRoomsCount: getData("/api/DashboardApi/GetAvailableRoomsCount"),
+            getAllocatedRoomsCount: getData("/api/DashboardApi/GetAllocatedRoomsCount")
 
         };
 

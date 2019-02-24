@@ -52,6 +52,10 @@
         }
 
         vm.findStudent = function () {
+
+           var  table = $('#studentTable').DataTable();
+            table.clear().draw();
+
             var payload = vm.model;
             payload.limit = 100;
             services.findStudent(payload,
@@ -165,6 +169,7 @@
             table.DataTable(options);
 
             table = $('#studentTable').DataTable();
+       
 
             $('#studentTable tbody').on('click', 'tr .action_allocate_room', function () {
 
